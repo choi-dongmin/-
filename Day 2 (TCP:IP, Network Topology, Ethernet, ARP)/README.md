@@ -21,7 +21,7 @@ L3	[L3(DATA)] 									L3	[L3(DATA)]
 				encapsulation 									decapsulation
 L2	[L2(DATA)T]									L2	[L2(DATA)T]	
 				encapsulation									decapsulation
-L1	아날로그 데이터 					 ---------->		   	L1	   아날로그 데이터				
+L1	아날로그 데이터 					 ---------->		   	L1	 아날로그 데이터				
 ```
 
 - Encapsulation (캡슐화)	: 해당 레이어에서 처리할 프로토콜을 헤더에 기록해 하위 레이어에게 전달하는것.
