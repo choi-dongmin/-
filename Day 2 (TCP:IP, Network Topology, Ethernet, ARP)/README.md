@@ -21,7 +21,7 @@ L3	[L3(DATA)] 									L3	[L3(DATA)]
 				encapsulation 									decapsulation
 L2	[L2(DATA)T]									L2	[L2(DATA)T]	
 				encapsulation									decapsulation
-L1	아날로그 데이터 					 ---------->		   	L1	아날로그 데이터				
+L1	아날로그 데이터 				 ---------->	L1	아날로그 데이터				
 ```
 
 - Encapsulation (캡슐화)	: 해당 레이어에서 처리할 프로토콜을 헤더에 기록해 하위 레이어에게 전달하는것.
@@ -34,7 +34,7 @@ L1	아날로그 데이터 					 ---------->		   	L1	아날로그 데이터
 
 1. Network Interface Layer(=Network Access Layer)
 	- OSI의 Physical Layer, Data-Link Layer와 유사한 기능을 수행하는 계층이다.
-	- TCP/IP의 가장 최하위 계층.
+	-  TCP/IP의 가장 최하위 계층. 물리적 주소, 논리 주소를 및 프로토콜을 헤더에 프레임으로 저장하기 위한 최하위 레이어. 
 	- OSI의 L1, L2와 같은 프로토콜.
 	- 대표적인 프로토콜 : 이더넷, ARP
 ```
@@ -42,6 +42,7 @@ L1	아날로그 데이터 					 ---------->		   	L1	아날로그 데이터
 Ethernet : 특정 구역 내 정보통신망인 LAN에 사용되는 이더넷의 물리적인 주소 MAC Address를 위함.
 ARP : 네트워크에 접속되어 있는 컴퓨터의 인터넷 주소(IP 주소)와 이더넷 주소를 대응시키는 프로토콜.
 ```
+
 ### 이더넷(EtherNet)
 -  데이터 링크 계층에서 MAC(media access control) 패킷과 프로토콜의 형식을 정의한다.
 - MAC Address = 물리주소
@@ -78,19 +79,23 @@ Tail
 - IP Add를 MAC Add로 변환하는 프로토콜
 - ARP Protocol 동작 형태 (Mac Add를 알아내는 형태)
  	1. ARP Request
-     	* Broadcast로 해당 MAC address 질의
-	 2. ARP Reply
+ 		* 상대방의 MAC address 를 모를때 Broadcast로 해당 MAC address 질의
+	2. ARP Reply
       	* Unicast로 해당 MAC address 응답
 
 		 
 
-![ARP 프레임](https://reaper81.files.wordpress.com/2010/07/arp-header3.png)
+![ARP 패](https://reaper81.files.wordpress.com/2010/07/arp-header3.png)
 ```
 1. Hardware Type : 물리적 네트워크의 종류(Ethernet : 0x1)
 2. Protocol Type : 논리주소를 제공하는 프로토콜 종류 (IPv4 : 0x 0800)
 3. hardware Add Length : 물리주소의 길이 6byte
 4. Protocol Add Length : 논리주소의 길이 4byte
 5. OPCode : ARP Protocol 메세지 종류 (ARP Request : 1,  ARP Reply : 2)
+	- 네트워크 통신 방식
+		* Unicast : 통신하고자 하는 대상과 직접 메세지를 주고받는 방식(1:1)
+		* Broadcast : 네트워크의 모든 호스트에게 메세지를 보내는 방식(1:All)
+		* Multicast : 네트워크의 특정한 그룹 호스트에게 메세지를 보내는 방식 (1:Gurop)
 6. Sender Hardware Add : 송신자의 물리주소
 7. Sender Protocol Add : 송신자의 논리주소
 8. Target Hardware Add : 수신자의 물리주소
@@ -157,9 +162,12 @@ L1(Network Layer)			L2(Data-Link Layer)
 	* 여러 호스트를 연결시켜주는 네트워크 장비
 	* 입력 신호를 받아 다른포트에 복제해 출력하는 장비
 	* 연결된 호스트구분 불가
+	* Collision Domin은 허브 영역 전체에 걸침
+	* 다수의 호스트가 접속하면 속도 저하가 이루어짐
 
 - Repeater
 	* 접속 시스템 수를 증가시키거나 혹은 전송 거리를 연장하고자 할 때에 사용하는 네트워크 장비
+	* 전송 거리가 멀면 멀수록 노이즈, 저항을 받는데 리피터가 증폭 시켜준다.
 	* 증폭장비
 
 ## L2
@@ -190,8 +198,13 @@ Router / Bridge 차이점
 ## L4
 - Firewall
 	* 비인가 외부의 접근을 차단하는 네트워크 보안 장비
-	* IP + Port를 사용해 허용된 서비스 및 네트워크만 허용한다.
+	* IP Add + Port Number를 사용해 허용된 서비스 및 네트워크만 허용한다.
  
+## 그외
+- Gateway
+	* 서로 다른 네트워크로 데이터를 전송하기위한 관문.
+	* 서로 다른 프로토콜 망에 전달을 해도 프로토콜을 변환하여 데이터를 주고 받는다.
+
 # 네트워크의 구조
 ## 네트워크 토폴로지 (Network Topology)
 - 네트워크의 구성요소(링크, 노드 등)를 물리적으로 연결한 상태, 방식
@@ -199,9 +212,11 @@ Router / Bridge 차이점
 ## 네트워크 토폴로지 종류
 - 버스형,링형,성형,트리형,그물형
 	1. 버스형 토폴로지
-		- 모든 네트워크 노드와 주변장치가 파이프 등의 일자형 케이플(Bus)에 연결된 상태이다.
+		- 모든 네트워크 노드와 주변장치가 파이프 등의 일자형 케이블에 연결된 상태이다.
 		- 양 끝단에 정확한 신호 전달을 위한 Termination이 있다.
 		- T탭을 이용해 연결한다.
+		- 코어가 되는 일자형 케이블이 문제가 생긴다면 오류가 생긴다. 
+		- 코스트가 저럼하다
 
 	2. 링형 토폴로지
 		- 노드가 순차적으로 링에 연결된 형태로 모든 노드가 하나의 링 형태로 연결.
@@ -209,18 +224,31 @@ Router / Bridge 차이점
 
 	3. 성형(Star) 토폴로지
 		- 중앙에 제어노드가 있고 나머지 모든 노드를 제어노드와 연결해 놓은 형태의 네트워크 토폴로지.
+		- 중앙제어노드로 관리가 편하고 중앙제어노드의 성능이 그 네트워크의 성능. 
 		- 모든 노드가 '중앙제어노드'에 연결되어 통신함으로 중앙노드의 안정성과 제어가 중요하다.
+		- 많이 사용하는 형태
 
 	4. 트리형 토폴로지
 		- 서형 토폴로지의 변형의 형태로 성형의 단점을 일부분 해소한다.
+		- 일부 노드가 장애가 발생해도 다른 노드는 네트워크 사용이 가능하다. 
 		- 중간에 제어노드를 두어 하위 노드들을 제어한다.
 
 	5. 그물형 토폴로지(Mesh Topology) 
 		- 전체의 노드가 1:1 로 연결되어 있는 형태.
 		- 네트워크 구성 방식중에 가장 복잡하고 고비용이지만 가장 안정적인 토폴로지 형태.
-		- 보통은 코어 네트워크에서 안전성을 위해 구축을 한다.
+		- 일반적인 경우보다는 보통은 코어 네트워크에서 안전성을 위해 구축을 한다.
+		- n(n-1)/2 개의 링크가 필요.
 
 ![Network Topologies](https://www.mbaknol.com/wp-content/uploads/2016/02/Network-Topology-Types-Mbaknol.jpg.webp)
 
 - 환경에 따라 여러가지 토폴로지를 혼합해 사용한다.
+
 ## 키워드
+- Encapsulation : 해당 레이어에서 처리할 프로토콜을 헤더에 캡슐화 시켜 하위레이어로 전달하는 과정. 
+- Decapsulation : 하위 레이어에서 역캡슐화 시켜 상위레이어로 전달하는 과정.
+- TCP/IP Suite : Network Interface Layer, Internet Layer, Transport Layer, Apllication Layer 로 이루어진 프로토콜 체계
+- Ethernet : MAC(Midea Access Control) 패킷과 프로토콜 형식을 정의한다.
+- ARP(Address Resolution Protocol) : IP Add를 MAC Add로 변환하는 프로토콜
+- Switch : L2를 대표하는 여러 호스트를 연결하기위한 네트워크 장비로 프레임을 다룰 수 있는 장비.
+- Router : 네트워크간 서로 연결하는 장비로 논리주소를 기반으로 Routing을 실행.
+- Network Topology : 네트워크의 구성요소(링크, 노드)를 물리적으로 연결한 형태, 방식으로 Bus, Ring, Star, Tree, Mesh 형태가 존재한다.
