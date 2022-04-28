@@ -126,3 +126,16 @@
 	* 사설 IP가 공인 IP와 함께 공인 네트워크로 나아갈떄 NAT Table에 사설 IP를 기록하여 데이터를 다시 수신 받을때에 공인 IP까지 도달 후 사설 네트워크로 돌아올때 NAT Table 확인 절차를 거친후 진행한다.   
 
 ## 키워드
+- Unicast : 호스트가 네트워크를 통해 연결하는 방식.(1 : 1)
+- Broadcast : 호스트가 전 네트워크에 걸쳐 연결하는방식 (1 : All)
+- Internet Layer : IP를 통해 논리주소를 제공하는 레이어
+- IP(Internet Protocol) : IP add를 기반으로 Host 와 Network를 인식해 목적지까지 패킷을 전달하기 위한 비 연결적이고 비 신뢰적인(그저 데이터를 전달하고 끝인 프로토콜) 프로토콜.
+- IPv4 : IP 프로토콜 중 하나의 버전.
+- Qos (Quality of Servic) : 어떠한 서비스가 과다한 트래픽을 사용할 경우를 대비해 각각 서비스의 최소의 트래픽을 보장하는 방법.
+- Fregmentation : IP 패킷을 잘게 쪼개는 단편화 과정.
+- TTL(Time To Live) : 패킷의 수명을 나타내는 IP Header의 필드
+- IP Option : 추가적으로 다른 필드를 입력할 수 있는 IP Header 필드이먀 가변적이다.
+- IP주소의 관리방식(IPv4) : 클래스를 단위로 관리를 하는가에 따라 Classful / Classless 방식으로 나뉜다.
+- 공인 IP 주소 : 공인된 네트워크(Internet)을 사용하기 윈한 IP 주소.
+- 사설 IP 주소 : 사설 네트워크에서 사용이 가능한 IP 주소.
+- NAT(Natwork Address Translation): 사설 IP 주소를 공인 IP주소로 변환 하거나 또는 그 반대의 절차를 진행한다.
