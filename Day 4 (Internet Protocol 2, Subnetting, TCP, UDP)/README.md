@@ -330,3 +330,10 @@ Network 8		Network IP : 160.250.128.224/27
 - Checksum : UDP 헤더와 데이터의 오류를 검증하기 위한 필드 - 16bit의 필드 길이
 
 ## 키워드
+- CIDER 표기법 : IP와 Subnetmask를 함께 표기하는법.
+- Subnetting :  네트워크를 여러개의 네트워크로 작게 분할하여 네트워크를 사용하는 방법으로 호스트/네트워크 수의 따라 하는 방식이 나눠진다.
+- ICMP(Internet Contorol Message Protocol) : IP 프로토콜을 보조하는 프로토콜. 에러보고 및 정보제공을 수행한다. 
+- TCP(Transmission Control Protocol) : 네트워크로 데이터를 전달하기 전 연결 역할을 수행하는 프로토콜. 
+- 3 Way-Handshake : 데이터 전송을 위한 연결 전 세션을 수립과정으로 호스트간 SYN,ACK Flag를 사용한다..
+- 4 Way-Handshake : 데이터 전송 종료를 위한 세션 수립과정으로 호스트간 FIN, SYN, ACK Flag 를 사용한다.
+- UDP(User Datagram Protocol) : 전송 프로토콜 중 하나로 비 신뢰적, 비 연결지향적 프로토콜로 '빠른 데이터 전송'을 요구할 때 사용한다.
