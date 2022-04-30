@@ -116,3 +116,11 @@ Router# copy running-config startup-config
 ```
 
 ## 키워드
+- Packet Tracer : Cisco 에서 만든 가상 네트워크 시뮬레이션 프로그램으로. Cisco IOS를 사용한다.
+- TP(Twisted Pair) : 또는 꼬임선이라고 하며 주로 LAN 구간에서 사용한다. 차쳬의 유무로 UTP. STP로 구분한다.
+- tright Through : 상호 간 다른 네트워크 장비끼리 연결에 사용되는 케이블 방식.(케이블 양 끝쪽이 전부 T568B 의 형태)
+- Crossover Through : 상호 간 같은 네트워크 장비끼리 연결에 사용되는 케이블 방식.(케이블 양끝이 T568B, T668A의 형태)
+- Serial : WAN 구간에서 Route를 서로 연결하는 케이블.
+- Routing : 데이터를 목적지까지 전달 시키기 위한 최적의 경로(Best Route)를 결정하는 과정으로 Static Routing, Dynamic Routing이 있다.
+- Routing Protocol : 경로를 동적으로 구성해 "라우팅을 수행"하는 프로토콜
+- Routed Protocol : Routing Protocol에 의해 Routing이 되는 네트워크 프로토콜
