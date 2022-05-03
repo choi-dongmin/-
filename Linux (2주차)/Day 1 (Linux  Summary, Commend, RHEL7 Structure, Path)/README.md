@@ -142,6 +142,7 @@ ex) man -f passwd : 제목 중 passwd 를 모두 찾아 출력.
 # ls -h (human) 파일 크기는 K, M, G 단위를 사용하여 보기 좋게 표시
 # ls -c (ctime) mtime 대신에 ctime 출력
 # ls -u (atime) mtime 대신에 atime 출력
+# ls -i link file 을 위한 i-node 값 출력
 ```
 
 ## pwd
