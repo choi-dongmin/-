@@ -151,6 +151,7 @@ $ at Time command	// 시간의 지정 형식은 hh:mm yyyy-mm-dd
 ex ) $ at 17:00 2022-12-12
 
 at -l 	// at 예약이 된 작업 리스트를 목록으로 출력 
+at -d	// at 예약 지우기
 ```
 - 직접 날자와 데이터 위치와 이름 지정
 ![스케쥴링 at](https://user-images.githubusercontent.com/57117748/167383680-27337636-b61c-4620-b370-27f4de808832.png)
