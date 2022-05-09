@@ -164,11 +164,12 @@ at -d	// at 예약 지우기
 2. crontab
 	- 정기적인 프로세스 작업 예약.
 	- vim Editor 를 이용해 편집한다.
-	- 일(0~59) 시(0~23) 일(1~31) 월(1~12) 요일(0~6) 작업내용 의 순서대로 입력한다.
 
 ![crontab](https://user-images.githubusercontent.com/57117748/167385763-797cf44f-95fe-4f7d-8fd8-c0c86c75833b.png)
 
 ```
+- 일(0~59) 시(0~23) 일(1~31) 월(1~12) 요일(0~6) 작업내용 의 순서대로 입력한다.
+
 EDITOR=vi; export EDITOR 		// Linux 에 따라 기본 편집기가 vi 가 아닐수 있음으로 설정
 
 $ crontab -e 		// -e 를 통해 vim 처럼 사용가능
