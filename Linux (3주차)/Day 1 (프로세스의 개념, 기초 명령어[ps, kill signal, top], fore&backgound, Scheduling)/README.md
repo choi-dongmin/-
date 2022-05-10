@@ -268,8 +268,4 @@ at : 지정된 시간에 1회의 프로세스 작업을 명령 하는 것. ($ at
 crontab : 정기적으로 실행할 프로세스를 예약하는 명령. contab은 vi Editor 를 사용한다 (vim : corntab mm hh dd mm date command)
 
 at,corntab 엑세스 제어 : /etc/at.deny or allow /etc/cron.deny or allow 을 통해 접근을 제어하는 방법 
-	1. deny 파일만 있다면 dney 에 등록된 계정은 스케쥴링 불가
-	
-	2. deny, allow 둘 다 있다면 allow 에 등록된 사용자만 스케쥴링 가능
-	
-	3. 둘 다 없다면 root 사용자만 스케쥴링 가능  
+  
