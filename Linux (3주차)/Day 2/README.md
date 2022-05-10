@@ -1,241 +1,265 @@
-# 프로세스의 개념 
-- 하드 디스크에 있는 파일이 실행되어 메모리에 올라간것.
+# Permission 
 
-##프로세스 유형
+- 리눅스는 다계정 운영체제이고 그로 인해 타 계정의 파일에 무단으로 접근하는것을 방지하기 위해 접근 권한 보호를 제공한다.
 
-1. 데몬 프로세스
-	- 서비스를 제공하는 프로세스. Background 에서 계속 실행중인 프로세스이다. (주로 실행하면 운영체제에 의해 실행되는 프로세스들)
+![Permission](https://user-images.githubusercontent.com/57117748/167590708-de9a2024-7116-489e-b801-85d07b342a4f.jpg)
 
-2. 고아 프로세스
-	- 프로세스가 실행중에 부모가 종료되어 없어지게 되어 systemd(최상위 부모 프로세스 : 1번)의 자식 프로세스로 편입됨.
-
-3. 좀비 프로세스
-	- 자식 프로세스가 종료되었는데 계속 프로세스 테이블에 남아있는 경우
-	- defunct 프로세스라고 읽컫기도 함
-	- 좀비 프로세스가 많아지면 테이블의 용량이 부족하여 에러가 발생하기도 한다.
-	- 서버의 경우 항상 가동중이기에 좀비 프로세스를 수시로 관리 하여야 한다.
-
-# 프로세스 기초 명령어
-
-
-## ps -ef (현재 계정의 실행중인 프로세스들을 확인하기)
 ```
-$ ps -ef (Svr4) // -e 모든 프로세스의 정보 -f 자세히 출력
-$ ps -aux (BSD)
+r: read = 읽기,복사(파일) 또는 목록 보기(dir) 
+w: write = 수정,이동,삭제(파일) 또는 생성,삭제(dir) 
+x: execute = 실행(파일) 또는 접근(dir)
 
 
-ps -ef 의 주요 정보 요소 ---------------------------------------
+-rw-r--r-- => 1. - / 2. rw- / 3. r-- / 4. r--
 
-stime : 프로세스의 시작시간
-PID : 프로세스의 고유한 아이디
-PPID : 부모의 PID
+1. - : 파일을 뜻한다. (dir = d)
+2. rw- : 사용자 접근 권한을 뜻한다.
+3. r-- : 그룹 접근 권한을 뜻한다.
+4. r-- : 기타사용자 접근 권한
 
 ```
 
-![ps -ef](https://user-images.githubusercontent.com/57117748/167371739-2a142d42-bb80-41f0-b218-de7979025cba.png)
+- /etc/shadow 파일은 접근권한이 ------- 이기 떄문에 user 모드에서 읽는것이 불허된다. 
+
+![접근권한](https://user-images.githubusercontent.com/57117748/167593191-e5906851-585c-4e09-9b53-8e69d9eaa1d5.jpg)
 
 
-- 프로세스 점유율 확인
-```
-ps -u 
 
-ps -u 의 주요 정보 요소 ---------------------------------------
-
-cpu% : 해당 프로세스가 cpu 를 얼마나 점유하는지 표시
-memory% : 해당 프로세스가 메모리를 얼마나 점유하는지 표시
-```
-
-![화면 캡처 2022-05-09 173727](https://user-images.githubusercontent.com/57117748/167372368-3f2c3911-89c2-484e-9e9f-becb2b97b3d0.png)
-
-## kill sginal
--시그널 : 메모리에 실행되고 있는 프로세스에 보내는 신호.
-
-
-- kill Signal List 목록 확인
-![kill signal list](https://user-images.githubusercontent.com/57117748/167374242-bcaa1f4b-095b-4f21-a533-28fc02eda12f.png)
+## 접근 권한의 변경 (chmod)
+- 심볼 모드와 숫자 모드가 있지만 주로 숫자모드(8진법)을 사용한다.
 
 ```
-$ kill -l 		// kill signal list 출력
+1. rwx / 2. rwx/ 3. rwx
 
-kill 의 주요 요소 ---------------------------------------
-2 : 작업 중단 시그널을 보낸다.
-9 : 강제종료
-15 : kill 의 defult 값으로 기본종료
-```
+각각의 권한에 r:4(읽기), w:2(쓰기), x:1(실헹)
 
 
-- kill signal 보내기
-```
-$ kill 9 PID 	// 해당 PID 를 가지는 프로세스를 강제종료한다.
-$ kill PID 		// 해당 PID 를 가지는 프로세스를 기본(15) 종료한다.
-
-```
-![kill signal 보내기](https://user-images.githubusercontent.com/57117748/167376469-4f60c2f5-ee33-4d4f-903b-1d342d8b2db8.png)
-
-- pkill : 프로세스 이름을 이용해 종료 (권장되지 않음)
-
-## top
-- 윈도우의 작업 관리자와 엇비슷하다.
-- 메모리와 cpu 점유율 등을 볼 수 있다.
-
-![화면 캡처 2022-05-09 122014_LI](https://user-images.githubusercontent.com/57117748/167378823-6a074058-9397-4d47-99a2-5f6b11cb85c5.jpg)
+ex) -/rw-/r--/r-- = 4+2 / 4 / 4
+ex) -/rw-/r--/--- = 4+2 / 4 / 0
 
 
 ```
-$ top
+![chmod](https://user-images.githubusercontent.com/57117748/167595186-3dee50b0-d853-4061-9780-9a04baed3534.png)
 
-top 의 주요 정보 요소 ---------------------------------------
 
-tasks : task의 상태들을 확인 가능 running, sleeping, stopped, zombie 등
-%cpu : cpu의 상태를 확인 가능
-us : 가용중인 cpu의 용량
-id : 가용 할 수 있는 cpu 용량
-PID : 각각의 프로세스의 ID 값
-PR(Priority) : 우선 순위
-NI(Nice) : 친절도 (?)
-```
-
-* 프로세스들은 경쟁 , 경합 시스템이다 PR(priority), NI(NICE) 값이 낮을수록 우선순위가 높다.
-* pstree -p 프로세스의 관계를 부모, 자식으로 출력한다.
-
-# foreground , background
-
-1. foreground 
-	- 프로세스가 실행되면 진행, 결과값이 모니터로 출력되는 것.
-
-2. background 
-	- 프로세스가 실행되면 진행, 결과값이 화면이 아닌 뒤에서 실행되는것
-
-## jobs
-- 백그라운드에서 실행하는 프로세스를 확인 
-
-![화면 캡처 2022-05-09 124303](https://user-images.githubusercontent.com/57117748/167379934-50e70904-f500-4736-a400-128706a152d0.png)
-
-## 작업전환
-- Fore to back or Back to Foregorund 로 변환하는 것을 작업전환이라고 한다.
-
-![작업 전환](https://user-images.githubusercontent.com/57117748/167380851-72aa11a2-f5f6-4acc-84d6-3ea1300f31e6.jpg)
+- 문제
 
 ```
-$ bg %RunnningID		// fg to bg
-$ fg %RunnningID		// bg to fg
+default : touch file 644 = -rw-r--r--
 
-fg,bg 의 주요 정보 요소 ---------------------------------------
+1.기타 사용자에게 실행 권한을 부여한다
+2.그룹과 기타 사용자의 실행 권한을 제거한다 
+3.모두에게 실행 권한을 부여한다 
+4.소유자에게 쓰기 권한을 부여하고 그룹의 쓰기 권한은 제거한다 
+5.소유자의 권한만 남기고 나머지 사용자의 권한은 모두 제거
 
-& : 백그라운드에서 실행
-^z : 일시정지
-^d : 정상적 종료
-^c : 종료
+1. 645 = -rw-r--r-x
+2. 644 = -rw-r--r--
+3. 755 = -rwxr-xr-x
+4. 644 = -rw-r--r--
+5. 700 = -rwx------
 ```
 
-## nohup
-- 계정에서 로그아웃 한 후에도 백그라운드 작업을 계속해서 진행
-- nohup 은 nohup.out 으로 저장된다.
+## 기본 접근 권한
+- 디렉토리 파일은 777의 기본값을 가지고 파일은 666의 기본값을 가진다.
+- umask : 파일이나 디렉토리 생성시 부여하지 않을 권한을 지정하는것
 
-![nohup](https://user-images.githubusercontent.com/57117748/167382193-0c92cfb1-d8a4-4cca-ace8-3cfaebaa4546.jpg)
+- root umask default : 022 / user mask default : 002
+- umask [숫자모드] 입력으로 변경이 가능하며 기본적으로 자신의 계정에만 설정된고 재부팅시에 기본 값으로 되돌아 간다
+- 만약 초기 설정을 하고 싶가면 초기 실행파일에 지정해 놓는다. 
+```
+umask 007
+```
+![화면 캡처 2022-05-10 122907_LI](https://user-images.githubusercontent.com/57117748/167602484-45b48743-4768-4e81-8413-8132f9644f6c.jpg)
+
+
+
+* 기본값과 umask 를 빼서 기본 접근 권한이 만들어 진다
 
 ```
-$ nohup command &
+root 
+1. diractory
+777 - 022 = 755 = drwxr-xr-x
 
-ex) $ nohup ls -al &
-```
-
-# 작업예약 (Scheduling)
-- 지정된 시간에 프로세스 작업을 명령 하는 것
-
-1. at
-	- 1회 단발적 프로세스 작업 예약.
-
-```
-$ at Time command	// 시간의 지정 형식은 hh:mm yyyy-mm-dd
-ex ) $ at 17:00 2022-12-12
-
-at -l 	// at 예약이 된 작업 리스트를 목록으로 출력 
-```
-- 직접 날자와 데이터 위치와 이름 지정
-![스케쥴링 at](https://user-images.githubusercontent.com/57117748/167383680-27337636-b61c-4620-b370-27f4de808832.png)
-
-- 지금으로 부터 5분후 실행
-![스케쥴링 at](https://user-images.githubusercontent.com/57117748/167385365-7ad9da79-5845-4900-9ff4-d8294a010222.png)
-![스케쥴링 at](https://user-images.githubusercontent.com/57117748/167385591-00789196-1264-4696-a259-193fd36db48d.jpg)
+2. file 
+666 - 022 = 644 = -rw-r--r--
 
 
-2. crontab
-	- 정기적인 프로세스 작업 예약.
-	- vim Editor 를 이용해 편집한다.
-	- 일(0~59) 시(0~23) 일(1~31) 월(1~12) 요일(0~6) 작업내용 의 순서대로 입력한다.
+user
+1. diractory
+777 - 002 = 775 = drwxrwxr-x
 
-![crontab](https://user-images.githubusercontent.com/57117748/167385763-797cf44f-95fe-4f7d-8fd8-c0c86c75833b.png)
+2. file 
+666 - 002 = 664 = -rw-rw-r--
+``` 
+
+## 확장 퍼미션 (특수접근권한)
+- setuid
+- setgid
+- stickybit
+
+
+1. setuid
+	- 사용자가 해당파일을 실행 시 현 사용자가 아닌 "해당 파일의 소유자"로 실행 
+	- chmod 4xxx 의 명령으로 setuid 부여
+	- ex) /bin/us
 
 ```
-EDITOR=vi; export EDITOR 		// Linux 에 따라 기본 편집기가 vi 가 아닐수 있음으로 설정
+chmod 4715
 
-$ crontab -e 		// -e 를 통해 vim 처럼 사용가능
-$ crontab -l 		// crontab 을 이용해 예약된 작업을 리스트로 출력
-$ crontab -r 		// crontab 을 이용해 예약된 작업을 모두 삭제 (권장되지 않고 -e 에서 dd 를 이용해 라인 지우기가 권장.)
-$ crontab -u UserName	// 타계정에 crontab 예약
+-rws--xr-x
 
+1. 사용자 권한에 실행 권한이 x 가 아닌 s 로 표시
 ```
 
-만약 개별 사용자가 아닌 시스템 차원적으로 정기적 예약하고 싶은 작업이 있다면 
 
--> /etc/crontab 에 작업을 등록한다.
+2. setgid
 
-
-## 연습
-
-1. 문제1
-![화면 캡처 2022-05-09 163120](https://user-images.githubusercontent.com/57117748/167386967-0ec1fed4-3adc-404b-be13-a96265053ce2.png)
-
-
-2. 문제2
--예문
-
-![화면 캡처 2022-05-09 163152](https://user-images.githubusercontent.com/57117748/167387043-2946ab0f-d610-4f78-ae08-fe12c6743b2d.png)
-
--정답
-
-![화면 캡처 2022-05-09 163341](https://user-images.githubusercontent.com/57117748/167387779-da328741-d1e9-4fba-8062-7f44800d9aaf.png)
-
-
-3. 문제3
-- 예문해석
-
-![화면 캡처 2022-05-09 163453](https://user-images.githubusercontent.com/57117748/167387835-cdd8d417-2a76-455d-9928-7212bb0cb776.png)
-
--정답
-```
-매년 1월 첫째주(1-7) 일요일(0) 저녁 12:00 에 시스템을 리부트 하여라
-
-10분마다 1시에서 5시사이에 매일 date 를 datefile01 에 이어써라
-
-3월, 6월, 9월(3,6,9) 두번째주(8-14) 화요일(2) 14:20 에 passwd 파일을 읽어드린 값을 usefile 에 덮어라
-```
-
-## at,corntab 엑세스 제어 설정 파일
-
-- 보안을 위해 deny, allow 파일을 사용해 스케쥴링 엑세스를 제어 할 수 있다.
-- allow 파일이 없는 경우가 있다 이 경우에는 직접 만들어줘 제한하고 싶은 계정 이름을 입력.
+	- 사용자가 해당파일을 실행 시 현 사용자가 아닌 "해당 파일의 그룹"으로 실행
+	- chmod 2xxx 의 명령으로 setgid 부여
 
 ```
-1.at
-/etc/at.deny
-/etc/at.allow
+chmod 2771
+
+-rwsrws--x
+
+1. 그룹 권한에 실행 권한이 x 가 아닌 s 로 표시
+```
+
+* 만약 setuid, setgid 를 동시에 부여하고 싶다면 6xxx 으로 부여
+* 특수 접근 권한의 경우 보안상 매우 중요하다.
 
 
-2.crontab
-/etc/cron.deny
-/etc/cron.allow
+![setuid, setgid](https://user-images.githubusercontent.com/57117748/167606481-ca09e06b-0feb-4ae8-a9be-f6c703b7390b.png)
 
 
-case 1 
-*.allow 파일은 존재 하지 않고 *.dney 파일만 존재 할 경우 *.dney 파일에 계정이 입력된 사용자는 스케쥴링의 사용이 불가하다.
+- /bin/passwd 는 사용자의 비밀번호를 변경하는 민감한 파일이기 때문에 setuid를 통해 다른 사용자가 접근하더라도 root 로 진입을 하게 된다.
+- 만약 그 설정을 변경하고 관리자가 아닌 다른 사용자가 실행한다면 결과는 어떨까?
 
-case 2 
-*.allow / *.dney 둘 다 존재 할 경우 *.allow 파일에 계정이 입력된 사용만 가능하다.
 
-case 3
-둘 다 존재하지 않는다면 root 만 스케쥴링 명령이 가능하다.
+- root에서 /bin/passwd setid 를 chmod 755 를 통해 변경
+![화면 캡처 2022-05-10 142851_LI](https://user-images.githubusercontent.com/57117748/167607739-2d186557-1608-47c9-8f30-2e7b93d089cd.jpg)
+
+
+- user 에서 비밀번호 변경 시도 및 실패
+
+![화면 캡처 2022-05-10 142920_LI](https://user-images.githubusercontent.com/57117748/167607942-3b65a779-c9b5-4358-b660-e24459e26078.jpg)
+
+
+
+
+3. stickybit
+	- 오직 디렉토리에서 부여 가능하면 쓰기와 연관이 있다.
+	- stickybit 이 설정된 디렉토리는 해당 파일 소유자와 root 계정만이 삭제를 할 수 있다.
+	- chmod 1xxx 로 부여한다.
+	- ex) 게시판 삭제 시스템, /etc/tmp(임시 파일 디렉터)
+	* 보통 stickybit 디렉토리는 공유 디렉토리에 설정 
+
+
+![화면 캡처 2022-05-10 144028_LI](https://user-images.githubusercontent.com/57117748/167608082-7782ce0c-66db-4762-85cf-c4921c570332.jpg)
+
+
+- 정리
 
 ```
+setuid : 오직 파일에만 설정
+stickybit : 오직 디렉토리에만 설정
+setgid : 둘 다 설정 그러나 디렉토리에 설정한 해당 디렉토리에서 생성한 파일의 소유 그룹은 해당 디렉토리의 소유그룹으로 지정. 
+```
+
+- 명령으로 확장 퍼미션 찾기
+
+```
+1. setuid file 찾기
+find / -perm -4000 
+
+2. setgid file 찾기
+find / -perm -2000 
+
+3. stickybit dir 찾기
+find / -perm -1000
+```
+
+# 디스크
+- 파티셔닝
+- 파일 시스템
+- 마운트
+
+## 하드디스크 구조
+
+![hard disk](https://sites.google.com/site/iebitwiki/_/rsrc/1343729284108/hardware/secondary-storage/hard-disk-drive/platter.png)
+
+- 하드 디스크의 최소 단위는 512byte 이며 '섹터'라고 일컫는다.
+- 섹터들이 모여 원을 이뤄 -> '트랙'
+- 트랙이 모여 -> '실린더'
+- 실린더가 모여 -> '파티션'
+- 파티션 -> '디스크'
+
+* MBR (Master Boot Record)
+	- 섹터들 중 가장 첫번째로 하드디스크에서 부팅할 때 현재 디스크에 파티션이 몇개인지 부팅 프로그램의 위치는 어디인지 등을 기록
+	- 총 4개의 파티션,  2TB를 가질수 있다.
+	- Extension(마지막 파티션을 또 분할) 을 한다면 파티션의 개수를 늘릴 수 있다.
+
+* GPT (GUID Partition Table)
+	- 그 외 섹터들 즉 물리적인 하드 디스크에 대한 파테션 테이블 레이아웃의 표준이다.
+	- 128개의 파티션으로 분리 가능
+
+## 디스크 연결 Interface 방식
+- E-ide -> SATA -> msata , NVMe :데스크톱
+- SCSI -> SA-SCSI(SAS) : 서버
+
+* 기본적으로 서버는 SCSI 를 주로 사용한다 SCSI 는 핫플러깅, 자체 디스크 컨트롤러를 통한 CPU 부담 절감 등이 가능하다.
+
+# 리눅스 파일 시스템
+- 파일과 디렉토리 집합을 구조적으로 관리하는 체계
+- 어떤 구조를 구성해 파일이나 디렉토리를 관리하느냐에 따라 다양한 형식의 파일 시스템이 존재
+- 저널링 : 디스크가 변화내용을 기록하는것 최근의 디스크들은 저널링을 대부분 지원한다.
+
+windows : nfts 
+Linux : ext4, xfs
+
+
+- 리눅스에서 지원하는 다른 디스크 기반 파일 시스템
+```
+iso9660 : CD-ROM, DVD의 표준 파일 시스템으로 읽기 전용으로 사용된다.
+nfs : network file system으로 원격 서버의 디스크를 연결할 때 사용된다.
+ufs : Unix file system으로 유닉스 표준 파일 시스템이다.
+vfat : 윈도우95,98,NT를 지원하기 위한 파일 시스템
+ntfs : 윈도우 NTFS를 지원하기 위한 파일 시스템
+```
+
+- 특수 용도 가상 파일 시스템
+```
+swap : swap 영역을 관리하기 위한 swap 파일 시스템이다. (swap:메모리를 사용하다 부족해 하드 디스크에서 빌려쓰는것.)
+tmpfs : tmp(temporary file system)으로 메모리에 임시 파일을 저장하기 위한 파일 시스템이며, 시스템이 재시작 할 때마다 기존 내용이 없어진다. Ex /tmp
+proc : proc 파일 시스템으로 /proc 디렉토리. 현재 커널의 상태를 나타내는 파일
+ramfs : 램디스크를 지원하는 파일 시스템이다.
+root : root file system으로 / 디렉토리이다.
+```
+
+## 리눅스의 모든 파일 시스템의 기본 개념
+- 파일은 모드 inode 로 관리 된다.
+- 특수 파일을 통해 장치에 접근 할 수있다. Ex) $ /dev
+* 리눅스의 모든것은 다 파일로 표현한다.
+
+## ext4 파일의 시스템의 구조 
+- 효율적으로 디스크를 사용하기 위해 저장 장치를 논리적인 블록의 집합(블록 그룹)으로 구분
+- 데이터 블록에는 데이터가 저장
+- 마치 다단계의 구조를 가진다.
+	* inode 비트 맵 : 파일 정보를 저장
+	* 데이터 블록 비트맵 : 실제의 데이터를 저장
+- 직접 블록에 데이터 주소가 있고 파일이 크면 다단계 형식으로 나눠 주소를 입력한다.
+![ext4 file system](https://i.stack.imgur.com/IN09u.gif)
+
+1. 블록 그룹 0 : 파일 시스템의 첫 번째 블록 그룹으로 특별하게 그룹 0 패딩과 슈퍼블록, 그룹 디스크립터를 가지고 있다. 
+	- 그룹 디스크립터 : 그룹 메타 데이터
+	- 슈퍼 블록 : 핵심 메타 데이터 
+2. 블록 그룹 a : 파일 시스템에서 첫 번째 블록 그룹이 아닌 블록 그룹으로 그룹 0 패딩이 없으나 슈퍼블록과 그룹 디스크립터에 대한 복사본을 가지고 있다.  
+3. 블록 그룹 b : 파일 시스템에서 첫 번째 블록 그룹이 아닌 블록 그룹으로 그룹 0 패딩, 슈퍼블록, 그룹 디스크립터가 없고 바로 데이터 블록 비트맵으로 시작한다.
+
+## 파일 시스템 마운트
+- 파일 시스템을 디렉토리 계층 구조의 특정 디렉토리와 연결하는것.
+- 마운트 포인트 : 디렉토리 계층 구조에서 파일 시스템이 연결되는 디렉토리를 마운트 포인트라 한다.
+
+![화면 캡처 2022-05-10 222405](https://user-images.githubusercontent.com/57117748/167638816-976f8218-2171-4255-8ffb-695b79d96a04.png)
 
