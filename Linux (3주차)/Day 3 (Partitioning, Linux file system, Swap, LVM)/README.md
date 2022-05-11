@@ -63,7 +63,7 @@ m : 도움말 출력
 - w 를 통해 변경사항 저장 후 종료
 
 - lsblk 를 통한 확인
-- 
+
 ![화면 캡처 2022-05-11 112950_LI](https://user-images.githubusercontent.com/57117748/167857941-8b0f7a6e-aba2-427f-aebc-f758b88603cd.jpg)
 
 
@@ -99,7 +99,8 @@ mkfs.ext4(xfs) [파일경로]
 ```
 
 * 마운트는 재부팅시 자동해제 됨으로 /etc/fstab 을 vi editor 를 이용해 설정값을 입력한다.
-	- /etc/fstab 파일 구조
+- /etc/fstab 파일 구조
+
 ![/etc/fstab](https://user-images.githubusercontent.com/57117748/167864746-4de459b8-c6b4-4c50-80ab-5c5abf6702af.png)
 ```
 1. # vi /etc/fstab 	: vi 를 이용해 fstab 진입
@@ -107,6 +108,7 @@ mkfs.ext4(xfs) [파일경로]
 3. 저장 후 종료 
 ```
 - lsblk -f 로 확인
+
 ![화면 캡처 2022-05-11 123307_LI](https://user-images.githubusercontent.com/57117748/167865470-4d129f81-c436-4ef3-836d-642c970cf2f6.jpg)
 
 # LVM (Linux Volume Maneger)
