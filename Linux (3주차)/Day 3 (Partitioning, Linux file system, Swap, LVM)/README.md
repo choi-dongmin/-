@@ -61,7 +61,6 @@ lsblk -f : 파티션의 관계 정보 및 파일 시스템 정보
 	![화면 캡처 2022-05-11 111323_LI](https://user-images.githubusercontent.com/57117748/167855940-c0dc3289-53bf-4ec3-bb20-53521d230b86.jpg)
 
 	- w 를 통해 변경사항 저장 후 종료
-	
 	- lsblk 를 통한 확인
 	![화면 캡처 2022-05-11 112950_LI](https://user-images.githubusercontent.com/57117748/167857941-8b0f7a6e-aba2-427f-aebc-f758b88603cd.jpg)
 
