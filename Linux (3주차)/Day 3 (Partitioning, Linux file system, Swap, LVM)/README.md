@@ -65,7 +65,7 @@ m : 도움말 출력
 ![화면 캡처 2022-05-11 112950_LI](https://user-images.githubusercontent.com/57117748/167857941-8b0f7a6e-aba2-427f-aebc-f758b88603cd.jpg)
 
 
-. mkfs : 파티션에 파일 시스템 설정
+2. mkfs : 파티션에 파일 시스템 설정
 - 각 파티션에 파일 시스템 설정
 - 파일 시스템 설정 명령
 ```
