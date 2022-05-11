@@ -49,6 +49,7 @@ m : 도움말 출력
 ```
 ![화면 캡처 2022-05-11 105145](https://user-images.githubusercontent.com/57117748/167854091-b4f48682-b0e5-4cc4-a03a-d7c3078e58ab.png)
 
+
 2. n : 새로운 파티션 추가
 - n 을 입력해 새로운 파티션을 만든다
 - 최대 4개의 파티션을 만들수 있으며 마지막 파티션은 Extended 로 설정해 다시 분할 할 수 있다.
@@ -65,6 +66,7 @@ m : 도움말 출력
 ![화면 캡처 2022-05-11 112950_LI](https://user-images.githubusercontent.com/57117748/167857941-8b0f7a6e-aba2-427f-aebc-f758b88603cd.jpg)
 
 
+
 3. mkfs : 파티션에 파일 시스템 설정
 - 각 파티션에 파일 시스템 설정
 - 파일 시스템 설정 명령
@@ -77,6 +79,8 @@ mkfs.ext4(xfs) [파일경로]
  파일 시스템 정보 확인 가능
 ![ext4](https://user-images.githubusercontent.com/57117748/167859825-08bd66e0-264f-4ac2-a680-bae32e916aa7.jpg)
 ![xfs](https://user-images.githubusercontent.com/57117748/167860048-b3a7e4fb-9ed5-490d-8497-178c6412a4e4.jpg)
+
+
 
 4. mount : 파일 시스템을 지정 디렉토리에 연결하는것
 - 파티션의 파일 시스템과 디렉토리를 마운트 해야만 저장 가능
