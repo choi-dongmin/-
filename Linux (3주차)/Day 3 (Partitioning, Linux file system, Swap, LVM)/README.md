@@ -29,9 +29,16 @@ lsblk -f : 파티션의 관계 정보 및 파일 시스템 정보
 ![fdisk -l](https://user-images.githubusercontent.com/57117748/167830932-76430e58-ffe3-41b6-9123-47d8c58db4ce.jpg)
 
 ## 파티셔닝의 과정
+```
+1. fdisk [장치경로] : 해당 디스크 파티션 장치로 진입
 
+2. n : 새로운 파티션 추가
 
-1. fdisk [장치경로] : 해당 디스크 파티션 관리로 진입
+3. mkfs : 파티션에 파일 시스템 설정
+
+4. mount : 파일 시스템을 지정 디렉토리에 연결하는것
+```
+1. fdisk [장치경로] : 해당 디스크 파티션 장치로 진입
 ```
 fdisk /dev/sdb
 ```
@@ -115,14 +122,27 @@ mkfs.ext4(xfs) [파일경로]
  여러 물리적 디스크를 하나로 연결시켜 하나의 디스크 처럼 만들어 파티션을 분할
 - LVM 연관 언어
 ```
-V(Physical Volume) : 실제 하드디스크의 파티션을 의미한다.
-G(Volume Group)  : 다수의 PV 를 그룹으로 묶은것.
-V(Logical Volume) : VG 를 파티셔닝한 각각의 파티션
+PV(Physical Volume) : 실제 하드디스크의 파티션을 의미한다.
+VG(Volume Group)  : 다수의 PV 를 그룹으로 묶은것.
+LV(Logical Volume) : VG 를 파티셔닝한 각각의 파티션
 PE(Physical Extent) : PV의 블록 단위
 LE(Logical Extent) : LV의 블록 단위
 ```
 
 ## LVM 생성과정
+```
+1. 기존 파티션들의 파일 시스템의 종류(ID) 변경
+
+2. PV 생성 
+
+3. VG 생성
+
+4. LV 생성
+
+5. LV에 파일 시스템 생성
+
+7. LV 마운트
+```
 1. 기존 파티션들의 파일 시스템의 종류(ID) 변경
 - fidisk [장치경로]에서 p 를 통해 system 이 어떤 형태인지 ID를 가지고 있는지 확인. (defaults : 83 Linux)
 ![화면 캡처 2022-05-11 140808_LI](https://user-images.githubusercontent.com/57117748/167871076-5d32cb13-3e90-4079-a308-652c1031fd49.jpg)
@@ -155,6 +175,7 @@ LE(Logical Extent) : LV의 블록 단위
 ```
 -vgdisplay -v 를 통해 생성확인
 ![화면 캡처 2022-05-11 142017_LI](https://user-images.githubusercontent.com/57117748/167875003-96da3fd1-0c7d-4cb3-8c2a-f7cd32439da6.jpg)
+
 4. LV 생성
 - lvcreate VG이름 -L or l 파티션사이즈 or 블록수 -n LV이름
 - lvscan 으로 확인
@@ -162,6 +183,7 @@ LE(Logical Extent) : LV의 블록 단위
 # lvcreate vgname -L 1G -n newlv
 ```
 ![화면 캡처 2022-05-11 142759_LI](https://user-images.githubusercontent.com/57117748/167876288-1193e49b-5285-4f1d-8b75-b02165355696.jpg)
+
 5. LV에 파일 시스템 생성
 - mkfs ext4 or xfs 를 통해 LV에 파일 시스템 설정
 ```
@@ -172,7 +194,7 @@ mkfs.ext4(xfs) /dev/vgname/lvname
 ![화면 캡처 2022-05-11 143051_LI](https://user-images.githubusercontent.com/57117748/167877569-d8de3726-4b87-429f-8be3-3fff081139dc.jpg)
 
 
-7. LV 마운트
+6. LV 마운트
 - mount 를 통해 지정 디렉토리와 마운트
 ```  
 # mkdir /mnt/lvdir
