@@ -5,7 +5,10 @@
 ## VG 확장 및 축소
 
 - 아래와 같은 상태에서 확장 및 축소를 진행
+
 ![화면 캡처 2022-05-12 111105](https://user-images.githubusercontent.com/57117748/168086159-33646ee1-1066-4fe9-841b-7b3a32f61f2b.png)
+
+
 
 * 확장 extend 
 
