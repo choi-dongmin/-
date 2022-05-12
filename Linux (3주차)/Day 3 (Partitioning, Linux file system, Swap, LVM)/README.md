@@ -264,7 +264,7 @@ fsck -b superblock백업위치 -y 장치경로
 3. 각 파티션을 swap 으로 만들기
 - # mkswap 파티션경로 를 통해 지정
 ```
-# mkswap /dev/sdb{1...3}
+# mkswap /dev/sdb{1..3}
 ```
 ![화면 캡처 2022-05-11 155221_LI](https://user-images.githubusercontent.com/57117748/167886635-874199c3-9c49-4ec6-8c01-cd5e974f7759.jpg)
 4. 수동 swap 마운트
