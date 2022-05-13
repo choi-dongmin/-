@@ -198,7 +198,7 @@ $ systemctl set-default target명
 	* 현재의 런레벨 변경
 
 ```
-# systemctl isolate targer명 or runlevelNmber
+# systemctl isolate target명 or runlevelNmber
 ```
 
 ![화면 캡처 2022-05-12 141104](https://user-images.githubusercontent.com/57117748/168104552-32ac9841-0777-4e60-8487-dcaa7383f9bf.png)
