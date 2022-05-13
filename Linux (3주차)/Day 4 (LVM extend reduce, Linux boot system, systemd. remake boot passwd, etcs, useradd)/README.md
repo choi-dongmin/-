@@ -11,10 +11,18 @@
 
 
 * 확장 extend 
+```
+1. vgextend : 해당 볼륨그룹에 PV 파티션을 추가
+
+2. lvextend : 논리적 저장공간을 확장한다. 
+
+3. 파일 시스템 확장 : lv 에 새로 추가된 pv(파티션)에게 기존 lv 가 가진 파일 시스템과 같은것으로 확장한다.
+
+```
 
 1. 기존의 VG에 PV 파티션을 추가.
 ```
-# vgxtend vg이름 파티션경로
+# vgextend vg이름 파티션경로
 ```
 ![화면 캡처 2022-05-12 111007_LI](https://user-images.githubusercontent.com/57117748/168086272-10d7ef4d-cb64-4d07-b036-9ee4bab89f5f.jpg)
 
@@ -44,6 +52,12 @@ resize2fs lv경로 				// ext4 계열
 * 축소 reduce
 	- 축소를 하는것은 테이터 파일이 손상이 있을 수 있어 권장되지 않음
 
+```
+1. 대체 할 수있는 vg 생성 후 축소하려는 파티션의 pvmove 를 통해 pv를 옮긴다.
+
+2. vgreduce 실행
+```
+
 1. 대체 vg 생성 후 pvmove 를 이용해 파일 옮기기
 	- 옮기는 파일을 운영체제가 임의로 VG 안의 디스크에 옮긴다.
 
@@ -54,7 +68,7 @@ resize2fs lv경로 				// ext4 계열
 ![화면 캡처 2022-05-12 225443](https://user-images.githubusercontent.com/57117748/168091661-9b5dfd94-c400-49e8-9fe7-ab76031fb29e.png)
 
 
-4. vgreduce 실행
+2. vgreduce 실행
 
 ![화면 캡처 2022-05-12 112622_LI](https://user-images.githubusercontent.com/57117748/168092339-dc2ac49f-df0f-443a-882f-f1b6f7038816.jpg)
 
@@ -174,6 +188,7 @@ systemclt unmask 서비스명	// 해당 서비스 사용 불가 해제
 
 
 ## systemd target unit (런레벨)
+```
 ------------------------------------------------------------------
 
 런레벨		의미						심볼릭 링크 					target 원본
@@ -197,9 +212,9 @@ $ systemctl set-default target명
 - 현재 타겟 변경
 	* 현재의 런레벨 변경
 
-```
-# systemctl isolate target명 or runlevelNmber
-```
+
+## systemctl isolate target명 or runlevelNmber
+
 
 ![화면 캡처 2022-05-12 141104](https://user-images.githubusercontent.com/57117748/168104552-32ac9841-0777-4e60-8487-dcaa7383f9bf.png)
 ![화면 캡처 2022-05-12 141656](https://user-images.githubusercontent.com/57117748/168104558-ac3c49e8-78a6-4d8c-bc52-49057bd2f23f.png)
@@ -296,7 +311,7 @@ $ shutdown -h +3 "이제 곧 종료됩니다."	// 3분후에 종료시키며 메
 ![화면 캡처 2022-05-13 001852](https://user-images.githubusercontent.com/57117748/168109847-1ba5f407-e88d-4c78-9142-692206a4ab82.png)
 
 ## /etc/group
-- 그룹에 대한 정보르 저장
+- 그룹에 대한 정보를 저장
 ```
 그룹이름 : x : GID : 보조그룹
 
@@ -318,7 +333,7 @@ $ shutdown -h +3 "이제 곧 종료됩니다."	// 3분후에 종료시키며 메
 ## useradd -D
 - 사용자 계정 생성시 기본값 설정
 ![화면 캡처 2022-05-13 002930](https://user-images.githubusercontent.com/57117748/168112208-145442bf-b140-4e49-9686-f17139e63874.png)
-
+```
 1. Group : 기본 등록 그룹의 GID로 100 은 users 그룹이다.
 2. Home : 홈 디렉터리 생성 위치
 3. Inactive : -1 이면 비활성 상태 0 이면 암호가 만료되면 계정이 잠긴다
@@ -339,3 +354,32 @@ $ shutdown -h +3 "이제 곧 종료됩니다."	// 3분후에 종료시키며 메
 ![화면 캡처 2022-05-12 173728](https://user-images.githubusercontent.com/57117748/168118192-ba46af25-8947-44a6-8b90-b152dae60cb2.png)
 
 ## 키워드
+
+vgextend : LVM 의 핵심 기술로 디스크가 가용중이더라도 확장을 할 수 있다.
+
+vgreduce : vg를 축소시킨다.
+
+BIOS : 메인보드가 처음 디스크를 확인하고 MBR 을 찾고 부트로더를 찾는 과정
+
+부트로더 : 운영체제 커널을 로딩하는 과정
+
+systemd : 리눅스가 시작되면서 시스템 실행에 필요한 서비스를 실행하는 과정으로 centos7 전 version은 init의 과정이다
+
+runlevel : 총 7단계로 나누어 지며 init 시절에 사용하던 시스템 로딩 및 종료 명령이다.
+
+systemd target unit : init 이 사라지면서 systemd 에서 사용하는 시스템 로딩 및 종료 명령이다.
+
+systemctl : 시스템 서비스 명령 체계
+
+데몬 프로세스 : 백그라운드에서 작업한는 프로세스. 시스템 실행에 필요한 프로세스들이 주로 있다. 
+
+/etc/passwd : 사용자의 계정정보가 저장되어 있는 파일
+
+/etc/shadow : 사용자의 암호가 저장되어 있는 파일
+
+/etc/group : 그룹의 정보가 저장되어 있는 파일
+
+useradd : 사용자를 추가 생성하는 명령어 -s -md -g -G -u
+
+useradd -D : 사용자 계정을 생성하는데 기본값 확인 및 변경가능 
+
