@@ -186,8 +186,8 @@ $ chown root:root 1234	// 1234 파일 소유자와 그룹을 root 로 변경
 
 - 로그의 흐름도
 ```
-syslog message -> systemd-journald 	-> /run/log/journal
-								  	-> rsyslogd -> /var/log									 
+syslog message -> systemd-journald -> /run/log/journal
+				   -> rsyslogd -> /var/log									 
 ```
 ![화면 캡처 2022-05-13 202207](https://user-images.githubusercontent.com/57117748/168273264-f944d6a1-bf83-472a-a0d3-a6eecceb0342.png)
 
