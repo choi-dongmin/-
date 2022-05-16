@@ -257,3 +257,24 @@ journalctl 명령어 -----------------------------------------------------
 - 영구저장 조건 2가지중 하나라도 포함하면 저장하지 않음
 	1. 현재 파일 시스템 전페 사이즈의 10% 를 초과하면 안한다.
 	2. 현재 파일의 여유공간중 15% 를 초과하면 안한다.
+
+
+## 키워드
+- usermod : 사용자의 계정 정보를 수정하는 명령어
+- userdel : 사용자의 계정을 지우는 명령어
+- groupadd : 새로운 그룹을 만드는 명령어이다.
+- groupmod : 그룹의 정보를 변경하는 명령어
+- groupdel : 그룹을 지우는 명령어
+- password ageing : 암호의 속성, 설정(min,max,warning,inactive,expire)을 바꾸는 명령어 
+EUID / RUID : EUID 는 현재 작업하는 계정의 UID / RUID 부팅 후 로그인한 계정의 UID
+su : 계정 전환 및 관리자 계정으로 전환
+sudo : 관리자의 권한으로 실행하는 명령이다. sudo 를 사용하기 위해선 wheel group에 속하여 있거나 혹은 etc/sudoers 파일에 형식에 맞게 저장되어 있어야 한다.
+passwd : 사용자 암호를 지정하는 명령어
+chown : 파일 및 디렉토리의 소유자와 그룹을 바꾸는 명령어
+log : 시스템에서 일어난 이벤트를 기록하는 것이고 이를 logging 이라고 일컫는다. 로그를 통해 문제의 원인을 판단 혹은 인가되지 않은 접근을 조회 할 수 있다.
+journal : 시스탬에서 발생한 모든 이벤트를 기록한다 그러나 휘발성 데이터 임으로 부팅을 하면 사라지고 이를 위해 디렉토리와 연결 시켜 저장하기도 한다.
+syslog : rsyslog.conf 에서 주어진 속성에 맞는 이벤트 들을 저장한다.
+Facility : 이벤트 발생 시 분류가 되는 기준으로 secure,message,kern,cron,deamon,syslog,user,* 이 있다.
+Priority : 이벤트의 중요성 정도로 debug,info,notice,warning,err,crit,alert,emerg 순서로 중요성을 나타낸다.
+system-journald : 부팅이 시작되면서 시작되는 모든 이벤트를 기록하며 그 기록은 bin 형태의 휘발성 데이터로 저장된다
+
