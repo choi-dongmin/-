@@ -266,35 +266,34 @@ C:\Windows\System32\drivers\etc\hosts	//windows
 5. 이용
 ```
 1. cashing 전용 DNS 서버 구축 (로컬전용)
+	1-1 설치 
+	```
+	# yum -y install bind bind-chroot		//DNS 서비스 설치
+	```
+	![화면 캡처 2022-05-17 232412](https://user-images.githubusercontent.com/57117748/168834673-696f0c5f-614d-4eef-80e5-79d2dec9effc.png)
 
-1-1 설치 
-```
-# yum -y install bind bind-chroot		//DNS 서비스 설치
-```
-![화면 캡처 2022-05-17 232412](https://user-images.githubusercontent.com/57117748/168834673-696f0c5f-614d-4eef-80e5-79d2dec9effc.png)
+	1-2 설정,구축
+		- /etc/named.conf 를 에디터를 통해 options를 바꿔준다.
+	```
+	# vi /etc/named.conf
+	```
+	![화면 캡처 2022-05-17 152452](https://user-images.githubusercontent.com/57117748/168836492-c0208d98-a7d9-43ff-b02a-c4ede52f2bd0.png)
 
-1-2 설정,구축
-	- /etc/named.conf 를 에디터를 통해 options를 바꿔준다.
-```
-# vi /etc/named.conf
-```
-![화면 캡처 2022-05-17 152452](https://user-images.githubusercontent.com/57117748/168836492-c0208d98-a7d9-43ff-b02a-c4ede52f2bd0.png)
+	1-3 서비스 시작
+		- systemctl restart / enable named 를 통해 서비스 시작
+	```
+	# systemctl restart named
+	# systemctl enable named
+	```
+	![화면 캡처 2022-05-17 233322](https://user-images.githubusercontent.com/57117748/168836900-c58a1dd0-a147-4962-82ad-d999c667fed9.png)
 
-1-3 서비스 시작
-	- systemctl restart / enable named 를 통해 서비스 시작
-```
-# systemctl restart named
-# systemctl enable named
-```
-![화면 캡처 2022-05-17 233322](https://user-images.githubusercontent.com/57117748/168836900-c58a1dd0-a147-4962-82ad-d999c667fed9.png)
-
-1-4 방화벽 제거
-	- firewall-cmd 를 통해 DNS 방화벽 제거
-```
-# firewall-cmd --permanent --add-service=dns
-# firewall-cmd --reload
-```
-![화면 캡처 2022-05-17 233551](https://user-images.githubusercontent.com/57117748/168837510-e2150a9a-a206-440f-85c3-d8a64947e5c3.png)
+	1-4 방화벽 제거
+		- firewall-cmd 를 통해 DNS 방화벽 제거
+	```
+	# firewall-cmd --permanent --add-service=dns
+	# firewall-cmd --reload
+	```
+	![화면 캡처 2022-05-17 233551](https://user-images.githubusercontent.com/57117748/168837510-e2150a9a-a206-440f-85c3-d8a64947e5c3.png)
 
 
 2. 본격적인 네임서버 구축
@@ -302,96 +301,97 @@ C:\Windows\System32\drivers\etc\hosts	//windows
 	- 실제 DNS 서버의 경우 2개의 서버(Master, Slave) 구축하여 안전하게 운영한다.
 	- 여기서는 1의 서버만 구축
 
-2-1 설치
-	- yum install 를 이용해 httpd 설치
-```
-# yum -y install httpd
-```
+
+	2-1 설치
+		- yum install 를 이용해 httpd 설치
+	```
+	# yum -y install httpd
+	```
 
 
-2-2 설정,구축 1
-	- html 파일을 /var/www/html 디렉토리에 넣는다 (이때 index.html 을 넣으면 해당 도메인 첫화면)
-	- /etc/named.conf 를 에디터를 통해 최하단에 아래와같은 문법을 넣어준다.
-	- 저장 후 checkconf 를 통해 문법검사를 거친다.
-```
-# vi /etc/named.conf
+	2-2 설정,구축 1
+		- html 파일을 /var/www/html 디렉토리에 넣는다 (이때 index.html 을 넣으면 해당 도메인 첫화면)
+		- /etc/named.conf 를 에디터를 통해 최하단에 아래와같은 문법을 넣어준다.
+		- 저장 후 checkconf 를 통해 문법검사를 거친다.
+	```
+	# vi /etc/named.conf
 
-------------------------------------------------
-zone "[새 도메인명]" IN{
-	type master;
-	file "[포워드존파일]";	// /var/named/ 주석으로 경로표시
-	allow-update{ none; };
-};
-------------------------------------------------
+	------------------------------------------------
+	zone "[새 도메인명]" IN{
+		type master;
+		file "[포워드존파일]";	// /var/named/ 주석으로 경로표시
+		allow-update{ none; };
+	};
+	------------------------------------------------
 
-# named-checkconf
+	# named-checkconf
 
-```
-![화면 캡처 2022-05-17 235517](https://user-images.githubusercontent.com/57117748/168842102-d8c4c9ac-7c1b-4a0f-ad03-d0d2592ede47.png)
-![화면 캡처 2022-05-17 235829](https://user-images.githubusercontent.com/57117748/168843259-56754db5-6150-4413-af63-eb30f590e661.png)
-
-
-2-2 설정,구축 2
-	- /var/named 디렉토리안에 named.conf 에서 작성했던 포워드존파일을 여기에 생성한다.
-	- 이때 cp 명령어를 통해 기존의 named 디렉토리의 named.localhost 파일을 내용 복사하여 만든다
-
-```
-# cd /var/named
-```
-![화면 캡처 2022-05-18 000423](https://user-images.githubusercontent.com/57117748/168844194-f3552e0e-e10b-4815-9603-8fb0b991b3f4.png)
-
-```
-cp /var/named.localhost ./[DNS 속성설정파일명]
-```
-![화면 캡처 2022-05-18 000643](https://user-images.githubusercontent.com/57117748/168844691-1b1e8122-c433-4593-a953-6a749b3fd332.png)
+	```
+	![화면 캡처 2022-05-17 235517](https://user-images.githubusercontent.com/57117748/168842102-d8c4c9ac-7c1b-4a0f-ad03-d0d2592ede47.png)
+	![화면 캡처 2022-05-17 235829](https://user-images.githubusercontent.com/57117748/168843259-56754db5-6150-4413-af63-eb30f590e661.png)
 
 
-2-2 설정,구축 3
-	- named.localhost를 복사한 DNS 속성설정파일을 수정
-	- named-checkzone 도메인명 포워드존파일 로 문법 체크
-![화면 캡처 2022-05-18 001749_LI](https://user-images.githubusercontent.com/57117748/168847147-e86e710f-573c-4a35-a096-99c520dd96ab.jpg)
+	2-2 설정,구축 2
+		- /var/named 디렉토리안에 named.conf 에서 작성했던 포워드존파일을 여기에 생성한다.
+		- 이때 cp 명령어를 통해 기존의 named 디렉토리의 named.localhost 파일을 내용 복사하여 만든다
 
-![화면 캡처 2022-05-18 001625](https://user-images.githubusercontent.com/57117748/168846759-44eb1d1e-3a5e-478e-b85e-a4bc296ea95f.png)
+	```
+	# cd /var/named
+	```
+	![화면 캡처 2022-05-18 000423](https://user-images.githubusercontent.com/57117748/168844194-f3552e0e-e10b-4815-9603-8fb0b991b3f4.png)
 
-![화면 캡처 2022-05-18 003124](https://user-images.githubusercontent.com/57117748/168850083-a1993420-7018-4fe6-9202-f9355e7685a4.png)
-
-```
-1. Serial : SOA 레코드에 대한 버전 정보
-2. refresh : Slave Server가 Master Server에게 DNS 정보가 갱신되었는지 물어보기 위해 대기하는 시간/주기
-3. Retry : Master Server가 응답하지 않을 경우 재요청 할 때 까지 기다리는 시간
-4. Expire : Slave Server가 이 시간동안 응답을 받지 못하면 더이상 물어보지 않음
-```
+	```
+	cp /var/named.localhost ./[DNS 속성설정파일명]
+	```
+	![화면 캡처 2022-05-18 000643](https://user-images.githubusercontent.com/57117748/168844691-1b1e8122-c433-4593-a953-6a749b3fd332.png)
 
 
-2-2 설정,구축 4 
-	- /var/named 디렉토리 퍼미션 설정
-```
-# chmod -R 754 /var/named
+	2-2 설정,구축 3
+		- named.localhost를 복사한 DNS 속성설정파일을 수정
+		- named-checkzone 도메인명 포워드존파일 로 문법 체크
+	![화면 캡처 2022-05-18 001749_LI](https://user-images.githubusercontent.com/57117748/168847147-e86e710f-573c-4a35-a096-99c520dd96ab.jpg)
 
------------------------
+	![화면 캡처 2022-05-18 001625](https://user-images.githubusercontent.com/57117748/168846759-44eb1d1e-3a5e-478e-b85e-a4bc296ea95f.png)
 
--R : 해당 디렉토리 파일 모두 다
-```
-![화면 캡처 2022-05-17 163306](https://user-images.githubusercontent.com/57117748/168850998-f64f9b19-e2e7-457d-b5c6-08082ee598b9.png)
+	![화면 캡처 2022-05-18 003124](https://user-images.githubusercontent.com/57117748/168850083-a1993420-7018-4fe6-9202-f9355e7685a4.png)
+
+	```
+	1. Serial : SOA 레코드에 대한 버전 정보
+	2. refresh : Slave Server가 Master Server에게 DNS 정보가 갱신되었는지 물어보기 위해 대기하는 시간/주기
+	3. Retry : Master Server가 응답하지 않을 경우 재요청 할 때 까지 기다리는 시간
+	4. Expire : Slave Server가 이 시간동안 응답을 받지 못하면 더이상 물어보지 않음
+	```
 
 
-2-3 서비스 시작 1
-	- systemctl restart / enable named 를 통해 서비스 시작
-```
-# systemctl restart named
-# systemctl enable named
-```
-![화면 캡처 2022-05-17 233322](https://user-images.githubusercontent.com/57117748/168836900-c58a1dd0-a147-4962-82ad-d999c667fed9.png)
+	2-2 설정,구축 4 
+		- /var/named 디렉토리 퍼미션 설정
+	```
+	# chmod -R 754 /var/named
 
-2-3 서비스 시작 2
-	- vi 에디터를 이용해서 /etc/resolv.conf 파일을 편집
-```
-vi /etc/resolv.conf
-```
-![화면 캡처 2022-05-18 003948](https://user-images.githubusercontent.com/57117748/168852256-6046318b-1215-4127-ae6d-40fff1d97957.png)
+	-----------------------
 
-2-3 서비스 시작 3
-	- dig 을 통해 확인
-```
-dig @[DNS서버] [도메인주소]
-```
+	-R : 해당 디렉토리 파일 모두 다
+	```
+	![화면 캡처 2022-05-17 163306](https://user-images.githubusercontent.com/57117748/168850998-f64f9b19-e2e7-457d-b5c6-08082ee598b9.png)
+
+
+	2-3 서비스 시작 1
+		- systemctl restart / enable named 를 통해 서비스 시작
+	```
+	# systemctl restart named
+	# systemctl enable named
+	```
+	![화면 캡처 2022-05-17 233322](https://user-images.githubusercontent.com/57117748/168836900-c58a1dd0-a147-4962-82ad-d999c667fed9.png)
+
+	2-3 서비스 시작 2
+		- vi 에디터를 이용해서 /etc/resolv.conf 파일을 편집
+	```
+	vi /etc/resolv.conf
+	```
+	![화면 캡처 2022-05-18 003948](https://user-images.githubusercontent.com/57117748/168852256-6046318b-1215-4127-ae6d-40fff1d97957.png)
+
+	2-3 서비스 시작 3
+		- dig 을 통해 확인
+	```
+	dig @[DNS서버] [도메인주소]
+	```
