@@ -254,7 +254,8 @@ vi
 ![화면 캡처 2022-05-18 144251](https://user-images.githubusercontent.com/57117748/169066582-d441a523-258d-4359-b803-59262ce6d5d0.png)
 
 5. 외부에서 서버연결 확인하기 
-![화면 캡처 2022-05-18 144421](https://user-images.githubusercontent.com/57117748/169066735-70b50349-4233-4f8b-89a0-8c4bd923e660.png)
+![화면 캡처 2022-05-19 011852](https://user-images.githubusercontent.com/57117748/169092417-75e35625-550c-4edc-b7a5-93507db5afd5.png)
+
 
 ## 주요 속성 파일
 
