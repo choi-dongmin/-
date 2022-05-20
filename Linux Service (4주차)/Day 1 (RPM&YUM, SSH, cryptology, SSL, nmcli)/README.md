@@ -267,6 +267,8 @@ modify [프로필] ipv4.addresses [IP/Sub]	// 해당 프로필 IP 주소 바꾸�
 modify [프로필] ipv4.gateway [x.x.x.x]	// 해당 프로필 gateway 주소 바꾸기
 modify [프로필] ipv4.dns [8.8.8.8]	// 해당 프로필 dns 주소 바꾸기
 modify [프로필] ipv4.method [manual / auto]	// 해당 프로필 네트워크 설정 수동 / 자동 바꾸기
+nmcli con reload
+nmcli con up enp0s3
 ```
 
 - nmcli connection mod 
