@@ -156,7 +156,6 @@ iqn.2022-05.com.goorm:target
 ```
 # fdisk [/dev/sdb : 장치 경로]
 # mkfs.xfs [/dev/sdb1 : 파티셔닝 경로]
-xfs_growfs [/mnt/ : 마운트 경로]
 ```
 
 10. /etc/fstab
@@ -170,6 +169,13 @@ xfs_growfs [/mnt/ : 마운트 경로]
 
 11. 확인
 ![화면 캡처 2022-05-23 202436](https://user-images.githubusercontent.com/57117748/169808954-cbf06974-1d67-4281-974d-3ac0f6e5ca32.png)
+
+12. lvm scaling
+```
+# vgextend newvg /dev/sdb3
+# lvextend newvg -L +1G /dev/newvg/newlv
+# xfs_growfs [/mnt/ : 마운트 경로]
+```
 
 ## 오류 해결책
 1. 검색 중 오류 
@@ -197,3 +203,19 @@ xfs_growfs [/mnt/ : 마운트 경로]
 ```
 # iscsiadm -m node -T iqn.2022-05.com.goorm:target -R
 ```
+
+## 키워드 
+- 스토리지 : 데이터를 영구적으로 저장하기 위한 공간(장치)
+- 타겟 : 스토리지 장치를 제공하는 시스템으로 서버와 같은 역할
+- 이니시에이터 : 초기자 타겟이 제공하는 저장공간을 사용하는 시스템으로 클라이언트와 같은 역할
+- iSCSI : IP-SAN 형태의 블록 스토리지를 공유. 설정. 구성하는 패키지 툴
+- iSCSI 구성 과정
+	1. 타겟 구성
+		1) 패키지 설치
+		2) targetcli 준비
+		3) 서비스 활성화(설정값 초기화 방지)
+		4) 방화벽 설정
+	2. 이니시에이터 구성
+		1) IQN 설정
+		2) iscsiadm 검색 및 로그인
+		3) 장치 관리(파티셔닝/파일시스템)
