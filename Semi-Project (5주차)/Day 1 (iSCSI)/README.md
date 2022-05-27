@@ -71,7 +71,7 @@ iqn.2022-05.com.goorm:target
 # fdisk [/dev/sdb : 장치경로]	// 파티셔닝 진행
 # partprobe /dev/sdb
 # pvcreate [/dev/sdb{1..3} : 파티셔닝 경로]	// 물리 볼륨 만들기
-# vgcreate [/dev/sdb1 /dev/sdb/2 : VG를 위한 PV 경로]	// 볼륨 그룹 만들기
+# vgcreate [VGname][/dev/sdb1 /dev/sdb/2 : VG를 위한 PV 경로]	// 볼륨 그룹 만들기
 # lvcreate -L [1G : 1G 크기의 논리볼륨] -n [LVname]	// 논리 볼륨 만들기
 ```
 - 파티셔닝
