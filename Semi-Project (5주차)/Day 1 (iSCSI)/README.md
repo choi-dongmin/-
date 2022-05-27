@@ -147,7 +147,7 @@ iqn.2022-05.com.goorm:target
 ```
 # iscsiadm -m discovery -t st -p [10.0.2.100 : Target Server IP]	// 검색
 # iscsiadm -m node -T [iqn.2022-05.com.goorm:target : IQN] -l	// 로그인
-# iscsiadm -m session -p 3
+# iscsiadm -m session -P 3
 ```
 
 9. initiator 에서 파티셔닝 후 파일시스템 포맷 및 마운트
