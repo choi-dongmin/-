@@ -162,6 +162,7 @@ iqn.2022-05.com.goorm:target
 .
 .
 [/dev/sdb1 : 파티셔닝경로] [/mnt : 마운트 경로] xfs _netdev 0 0
+# mount -a
 ```
 ![화면 캡처 2022-05-23 161513_LI](https://user-images.githubusercontent.com/57117748/169808226-6a87f75d-48d6-4eb4-a42a-aa72509c8612.jpg)
 
@@ -172,7 +173,8 @@ iqn.2022-05.com.goorm:target
 ```
 # vgextend newvg /dev/sdb3
 # lvextend newvg -L +1G /dev/newvg/newlv
-# xfs_growfs [/mnt/ : 마운트 경로]
+# xfs_growfs [/mnt/ : 마운트 경로]'/
+# mount -a
 ```
 
 ## 오류 해결책
