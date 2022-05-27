@@ -145,12 +145,10 @@ iqn.2022-05.com.goorm:target
 
 8. iscsiadm 명령어를 통한 검색, 연결, 확인
 ```
-# iscsiadm -m discovery -t st [10.0.2.100 : Target Server IP]	// 검색
-# iscsiadm -m discovery -T node [iqn.2022-05.com.goorm:target : IQN] -l	// 로그인
+# iscsiadm -m discovery -t st -p [10.0.2.100 : Target Server IP]	// 검색
+# iscsiadm -m node -T [iqn.2022-05.com.goorm:target : IQN] -l	// 로그인
 # iscsiadm -m session -p 3
 ```
-![화면 캡처 2022-05-23 192708](https://user-images.githubusercontent.com/57117748/169804322-66650d38-212f-4788-85e5-0dc38c8561c2.png)
-![화면 캡처 2022-05-23 195716](https://user-images.githubusercontent.com/57117748/169804748-c2c46555-ac65-47f3-9280-bb25f0afa67d.png)
 
 9. initiator 에서 파티셔닝 후 파일시스템 포맷 및 마운트
 ```
