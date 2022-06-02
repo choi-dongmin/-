@@ -63,7 +63,7 @@
 
 7. 네트워크 확인 	
 	```
-	# echo '<?php phpinfo(); ?> > /var/www/html/index.php'
+	# echo '<?php phpinfo(); ?>' > /var/www/html/index.php'
 	# systemctl enable --now httpd
 	```
 	* 퍼블릭 IP으로 네트워크 확인
