@@ -48,7 +48,9 @@
 
 6. Web 구성(EC2)
 	- 인스턴스 연결 버튼 혹은 ssh 로 원격접속 
+
 	![화면 캡처 2022-06-02 224043](https://user-images.githubusercontent.com/57117748/171642599-89b0e656-896c-43c2-b9bf-594ca250b51b.png)
+
 
 	- 패키지 업데이트 및 설치
 	```
