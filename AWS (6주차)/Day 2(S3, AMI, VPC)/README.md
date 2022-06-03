@@ -8,7 +8,6 @@
 - 블록 스토리지 : EBS
 - 오브젝트 스토리지 : S3
 - 파일 시스템 기반 스토리지 : EFS
--  
 
 # S3 (Simple Storgae Service)
 - 무한대로 저장 가능 
