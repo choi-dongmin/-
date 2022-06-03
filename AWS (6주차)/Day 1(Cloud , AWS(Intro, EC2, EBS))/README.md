@@ -222,7 +222,9 @@ What is Datacenter ?
 1. 퍼블릭 인스턴스 생성
 
 2. 외부에서 해당 인스턴스로 접속
-	![화면 캡처 2022-05-31 231939](https://user-images.githubusercontent.com/57117748/171196121-005511f4-3c1e-497d-9a6b-c838e2b0b511.png)
+	```
+	ssh -i [keyname.pem] ec2-user@[IP 주소]
+	````
 
 4. 보안그룹에서 ICMP 허용 규칙 추가
 
