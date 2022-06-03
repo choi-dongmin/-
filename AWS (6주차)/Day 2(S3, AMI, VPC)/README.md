@@ -12,6 +12,7 @@
 # S3 (Simple Storgae Service)
 - 무한대로 저장 가능 
 - 저장하는 최상위 레벨을 bucket 이라고 일컫음 
+- 리전내의  bucket 이름은 유일해야한다
 - bucket에 각각의 파일들을 Object라고 부름
 - Public URL 로 접속가능 아니라면 / Private 직접 접근만 가능
 
