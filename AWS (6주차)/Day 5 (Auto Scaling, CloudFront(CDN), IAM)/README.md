@@ -213,4 +213,4 @@
 	- 하지만 IAM 역할은 한 사용자가 아니라 역할이 필요한 사용자, 그룹은 누구든지 연결 할 수있도록 설정
 
 ## IAM 서비스의 동작 방식
-	![화면 캡처 2022-06-03 191606](https://user-images.githubusercontent.com/57117748/171835679-87052dc9-7ef5-489f-b84d-d46b13c471dc.png)
+![화면 캡처 2022-06-03 191606](https://user-images.githubusercontent.com/57117748/171835679-87052dc9-7ef5-489f-b84d-d46b13c471dc.png)
