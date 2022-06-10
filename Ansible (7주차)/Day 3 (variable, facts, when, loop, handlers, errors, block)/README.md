@@ -353,9 +353,10 @@ db
     when: service_type == "database"
 ...
 ```
-![화면 캡처 2022-06-10 013016](https://user-images.githubusercontent.com/57117748/172898075-adedc39a-adbf-4c0b-8d2d-5ffa9159ba0b.png)
 
-![화면 캡처 2022-06-10 013051](https://user-images.githubusercontent.com/57117748/172898081-31e8ca6a-f8eb-453d-bb96-f789fdd85869.png)
+* 실행시 vagrant 사용자는 sshd_config 파일에 대한 권한이 없다 그래서 ansible.cfg 구성파일에서 ask_pass 항목을 yes로 하고 실행
+
+![화면 캡처 2022-06-10 013016](https://user-images.githubusercontent.com/57117748/172898075-adedc39a-adbf-4c0b-8d2d-5ffa9159ba0b.png)
 
 ![화면 캡처 2022-06-10 013100](https://user-images.githubusercontent.com/57117748/172898103-e6e5272d-43ef-41c8-bd46-d1f6edd4c813.png)
 
