@@ -53,6 +53,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 142015](https://user-images.githubusercontent.com/57117748/172808246-de8a5a3e-0fc1-452e-a5c9-441f54f799a0.png)
+
 ![화면 캡처 2022-06-09 142039](https://user-images.githubusercontent.com/57117748/172808250-a43394fa-3636-4dda-a45f-c7a11b123496.png)
 
 
@@ -71,6 +72,7 @@
 ...                                           
 ```
 ![화면 캡처 2022-06-09 151241](https://user-images.githubusercontent.com/57117748/172816267-24a67045-d5e1-46ee-8ddd-b406588ea146.png)
+
 ![화면 캡처 2022-06-09 151301](https://user-images.githubusercontent.com/57117748/172816279-50186407-da97-43d9-9e20-1ee44dcb73a0.png)
 
 2. 메모리 크기가 1024 이상인 경우 /etc/hosts 파일을 /tmp 로 복사
@@ -88,6 +90,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 171103](https://user-images.githubusercontent.com/57117748/172816933-d6919990-3abc-4717-9138-c436e482525c.png)
+
 ![화면 캡처 2022-06-09 171119](https://user-images.githubusercontent.com/57117748/172816936-507daff1-e351-43a1-bcc2-4f13a972f801.png)
 
 ## 반복문(loop)
@@ -138,6 +141,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 182801](https://user-images.githubusercontent.com/57117748/172815120-ed9b81a5-6cfc-453c-abac-d6ebac8bf713.png)
+
 ![화면 캡처 2022-06-09 183007](https://user-images.githubusercontent.com/57117748/172815121-78ca12f5-8597-4576-bd5c-70aaae3d4bb5.png)
 
 ## 반복문 연습
@@ -158,6 +162,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 152328](https://user-images.githubusercontent.com/57117748/172817215-ce14c96a-d114-4c1e-8d01-39a6d2df2cc7.png)
+
 ![화면 캡처 2022-06-09 152340](https://user-images.githubusercontent.com/57117748/172817217-a48120b4-3218-4572-9221-b0e42b0ec4a8.png)
 
 2. 다음 조건의 사용자들을 만드세요.
@@ -180,6 +185,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 152903](https://user-images.githubusercontent.com/57117748/172817965-58d2aa41-8432-4426-a9b5-34a161e25d46.png)
+
 ![화면 캡처 2022-06-09 152917](https://user-images.githubusercontent.com/57117748/172817971-525afc21-e11d-4f8c-b14a-3cb12e9105b6.png)
 
 ## Handlers
@@ -230,6 +236,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 162114](https://user-images.githubusercontent.com/57117748/172821147-558e6ff2-4d33-47cc-9561-c6929a0e0889.png)
+
 ![화면 캡처 2022-06-09 162144](https://user-images.githubusercontent.com/57117748/172821195-3043494e-50f7-461d-a004-ad6327902f6d.png)
 
 2. failed_when / chaged_when : 상태에 대한 별도 조건 지정
@@ -248,6 +255,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 162756](https://user-images.githubusercontent.com/57117748/172822015-fa411e1c-c480-46bc-87e7-21ae091fe964.png)
+
 ![화면 캡처 2022-06-09 162809](https://user-images.githubusercontent.com/57117748/172822046-b274b0ba-36f0-4b72-b202-4c016c1210fe.png)
 
 ## 블록처리
@@ -292,6 +300,7 @@
 ...
 ```
 ![화면 캡처 2022-06-09 231220](https://user-images.githubusercontent.com/57117748/172871410-aa98a22f-5805-4bc8-82e4-1951f59b1121.png)
+
 ![화면 캡처 2022-06-09 232704](https://user-images.githubusercontent.com/57117748/172871413-8eedba58-ed4a-4ec5-a6f1-2f68219c56e5.png)
 
 3. 변수 host_vars / group_vars 로 설정하기
@@ -328,6 +337,7 @@ db
 ...
 ```
 ![화면 캡처 2022-06-10 012251](https://user-images.githubusercontent.com/57117748/172896652-aa481362-f1ae-467a-be73-c41a8dd0f840.png)
+
 ![화면 캡처 2022-06-10 012303](https://user-images.githubusercontent.com/57117748/172896661-04f61485-e3b2-4fc5-b0c1-59a3bd4d33af.png)
 
 	- service_type 이 database 인 경우에만 copy 모듈로 /etc/ssh/sshd_config 파일을 /tmp 로 복사하기
@@ -344,7 +354,9 @@ db
 ...
 ```
 ![화면 캡처 2022-06-10 013016](https://user-images.githubusercontent.com/57117748/172898075-adedc39a-adbf-4c0b-8d2d-5ffa9159ba0b.png)
+
 ![화면 캡처 2022-06-10 013051](https://user-images.githubusercontent.com/57117748/172898081-31e8ca6a-f8eb-453d-bb96-f789fdd85869.png)
+
 ![화면 캡처 2022-06-10 013100](https://user-images.githubusercontent.com/57117748/172898103-e6e5272d-43ef-41c8-bd46-d1f6edd4c813.png)
 
 5. 핸들러 쓰기
