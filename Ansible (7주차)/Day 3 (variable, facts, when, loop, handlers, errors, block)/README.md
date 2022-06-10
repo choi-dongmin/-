@@ -339,7 +339,6 @@ db
 ![화면 캡처 2022-06-10 012251](https://user-images.githubusercontent.com/57117748/172896652-aa481362-f1ae-467a-be73-c41a8dd0f840.png)
 
 ![화면 캡처 2022-06-10 012303](https://user-images.githubusercontent.com/57117748/172896661-04f61485-e3b2-4fc5-b0c1-59a3bd4d33af.png)
-
 	- service_type 이 database 인 경우에만 copy 모듈로 /etc/ssh/sshd_config 파일을 /tmp 로 복사하기
 ```
 ---
