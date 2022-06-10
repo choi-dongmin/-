@@ -323,6 +323,7 @@ db
         file:
           path: /etc/ansible/facts.d
           state: directory
+	  recurse: yes
       when: os_type == "centos"
 ...
 ```
