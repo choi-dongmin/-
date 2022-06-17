@@ -129,7 +129,7 @@ golang              1.13                d6f3656320fe        8 months ago        
 
 1. 도커 로그인
 # docker login
-
+```
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 Username: cdm5212
 Password:
@@ -138,7 +138,7 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
-
+```
 2. tag 생성
 - docker tag 로 이미지 업로드를 위해 '아이디/repo이름:설명' 로 원본 이미지를 재정의 후 복사
 - '아이디/repo이름:설명' 으로 해야지 자신의 repo에 업로드 가능
