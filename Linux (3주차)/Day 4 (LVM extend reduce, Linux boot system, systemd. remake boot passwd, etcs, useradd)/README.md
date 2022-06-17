@@ -29,7 +29,7 @@
 
 2. LV의 사이즈 확장
 ```
-# lvxtend vg이름 -L 사이즈크기 or -l 블록수 lv경로
+# lvxtend vg이름 -L 사이즈크기 or -l 블록수 lv경로 -r(파일시스템도 같이 확장)
 ```
 ![화면 캡처 2022-05-12 111308_LI](https://user-images.githubusercontent.com/57117748/168086876-0eaed1d7-cbe6-45d1-b647-056ae7077d61.jpg)
 
