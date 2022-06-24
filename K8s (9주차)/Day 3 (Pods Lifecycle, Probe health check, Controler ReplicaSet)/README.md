@@ -458,7 +458,7 @@ $ kubectl get pods --watch
 $ watch -n1 kubectl get pods
 
 Every 1.0s: kubectl get pods                                          kube-master1: Wed Jun 22 14:25:28 2022
-NAME                   READY   STATUS    RESTARTS   AGE
+NAME                  	   READY   STATUS    RESTARTS   AGE
 testapp-pod1 		   1/1     Running   0          10m22s
 testapp-pod2   		   1/1     Running   0          12m22s
 testapp-rs-exp-6nmwn   	   1/1     Running   0          3m22s
