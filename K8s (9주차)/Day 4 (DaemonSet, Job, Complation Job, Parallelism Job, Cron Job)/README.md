@@ -409,16 +409,16 @@ cronjob.batch "testapp-cron" deleted
 ```
 
 ## 키워드
-DaemonSet : 마스터와 연결된 노드들에게 노드 셀렉터에 따라서 파드를 하나씩 유지하는 컨트롤러.
+- DaemonSet : 마스터와 연결된 노드들에게 노드 셀렉터에 따라서 파드를 하나씩 유지하는 컨트롤러.
 
-nodeSelector: nodes를 레이블을 이용해 식별하게 해주는 항목. DaemonSet.spec.template.nodeSelector
+- nodeSelector: nodes를 레이블을 이용해 식별하게 해주는 항목. DaemonSet.spec.template.nodeSelector
 
-Job: 지속적이지 않은 일회성 작업 즉, Job은 파드(컨테이너)의 애플리케이션이 실행이 완료/종료되는 것에 초점을 맞춘 컨트롤러
+- Job: 지속적이지 않은 일회성 작업 즉, Job은 파드(컨테이너)의 애플리케이션이 실행이 완료/종료되는 것에 초점을 맞춘 컨트롤러
 
-Job Completions: Job을 실행할때 이전 작업이 완료되면 순차적으로 작업을 실행한다.
+- Job Completions: Job을 실행할때 이전 작업이 완료되면 순차적으로 작업을 실행한다.
 Job.spec.completions  
 
-Job Paralleism : Completions을 기반으로 순차적 실행하지만 한번에 많이 실행 하고 싶다면 paralleism 을 이용해 병렬으로 처리한다. Job.spec.paralleism  
+- Job Paralleism : Completions을 기반으로 순차적 실행하지만 한번에 많이 실행 하고 싶다면 paralleism 을 이용해 병렬으로 처리한다. Job.spec.paralleism  
 
-Cron Job: 일회적인 작업(Job)을 반복,주기적으로 실행 할 수 있도록 해주는 컨트롤러
+- Cron Job: 일회적인 작업(Job)을 반복,주기적으로 실행 할 수 있도록 해주는 컨트롤러
  cronjob.spec.schedule에 cron Time 형식으로 작성
