@@ -191,10 +191,10 @@ spec:
 # 작동 확인
 $ kubectl get pods --watch
 
-testapp-pod-liveness   0/1     Pending   0          0s
-testapp-pod-liveness   0/1     Pending   0          0s
-testapp-pod-liveness   0/1     ContainerCreating   0          0s
-testapp-pod-liveness   1/1     Running             0          4s
+testapp-pod-liveness       0/1     Pending   0          0s
+testapp-pod-liveness       0/1     Pending   0          0s
+testapp-pod-liveness       0/1     ContainerCreating   0          0s
+testapp-pod-liveness       1/1     Running             0          4s
 testapp-pod-liveness-404   0/1     Pending             0          0s
 testapp-pod-liveness-404   0/1     Pending             0          0s
 testapp-pod-liveness-404   0/1     ContainerCreating   0          0s
@@ -461,8 +461,8 @@ Every 1.0s: kubectl get pods                                          kube-maste
 NAME                   READY   STATUS    RESTARTS   AGE
 testapp-pod1 		   1/1     Running   0          10m22s
 testapp-pod2   		   1/1     Running   0          12m22s
-testapp-rs-exp-6nmwn   1/1     Running   0          3m22s
-testapp-rs-exp-hlq4r   1/1     Running   0          3m22s
+testapp-rs-exp-6nmwn   	   1/1     Running   0          3m22s
+testapp-rs-exp-hlq4r       1/1     Running   0          3m22s
 ```
 ![화면 캡처 2022-06-22 163818](https://user-images.githubusercontent.com/57117748/175059332-ae8574fc-6806-4168-adb7-5b06bdfb9b66.png)
 
