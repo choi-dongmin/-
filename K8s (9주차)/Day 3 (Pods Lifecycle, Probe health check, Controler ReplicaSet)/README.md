@@ -350,7 +350,7 @@ spec:
 ![화면 캡처 2022-06-22 161141](https://user-images.githubusercontent.com/57117748/175050634-452d28cc-c998-48fa-9064-f1c805a1fe13.png)
 
 * 파드 확인
-``
+```
 $ kubectl describe replicaset/apps [podname]
 $ kubectl get pods --show-labels
 ```
