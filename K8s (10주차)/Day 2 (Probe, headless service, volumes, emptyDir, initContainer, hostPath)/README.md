@@ -513,7 +513,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
   selector:
     app: myapp-rs-hp
 ...
