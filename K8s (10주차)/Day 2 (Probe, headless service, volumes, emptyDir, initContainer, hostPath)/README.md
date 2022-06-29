@@ -287,10 +287,28 @@ myapp-rs-headless-sk27x
 - CRI : Container Runtime Interface
 
 * 쿠버네티스에서 지원하는 볼륨의 종류이다.
-1. emptyDir
-2. hostPath
-3. gitRepo
+1. emptyDir (node 로컬 사용)
+  - 임시로 데이터를 저장하는 빈 볼륨, , RAMDisk가능, 동일한 파드내의 컨테이너 간에 데이터를 공유, 경로 지정 불가
 
+2. gitRepo  
+  - initContainer, 빈 컨테이너에 gitrepo의 데이터를 clone한다, git에 업로드후 파드로 데이터 클론 할 수 있다
+
+3. hostPath (node 로컬 사용)
+  - 노드 로컬내에서 데이터를 저장하는 볼륨 그러나 emptyDir와 다르게 경로 지정이 가능하다.
+
+4. 네트워크 스토리지 볼륨
+  - 공유의 개념을 가지고 있음. 다른 호스트의 pod를 가능함. 하나의 pod에 동시에 접근가능함(동시쓰기는 안됨)
+  - cephfs,iscsi, nfs, rbd...
+
+5. 클라우드 스토리지 볼륨
+   - 다른 pod와 공유가능
+   - awsElasticBlockStore, azureDisk, azureFile, gcePersistentDisk, awsEBS  
+
+6. 정적/동정 프로비저닝 볼륨
+  - persistentVolumeClaim
+
+7. 특수 유형 볼륨
+  - configMap, secret
 
 
 ## emptyDir
@@ -648,3 +666,28 @@ hello hosPath Volumes
 $ kubectl exec myapp-rs-hp-zxc82 -- cat /usr/share/nginx/html/index.html
 hello hosPath Volumes
 ```
+
+## 키워드
+- Probe Health Check : probe를 이용해 컨테이너의 상태를 확인하는 방법으로 livenessProbe, readinessProbe, startupProbe 가 존재한다. 순서대로 컨테이너 활성화 확인, 서비스 준비 확인, 애플리케이션 시작 확인이다.
+
+- livenessProbe : 파드가 비활성화 되었을시 다시 시작 즉, 컨테이너가 시작되지 않았을시에 재실행 시키는 프로브
+
+- readinessProbe : 파드가 활성화 되어 서비스를 준비할 시작이 되었는지 확인하는 프로브
+
+- startupProbe : 처음 컨테이너를 실행시 사용하는 프로브로 애플리케이션 시작을 확인
+
+- HTTPGet : 지정된 URL로 HTTPGet 신호를 보내 확인하는 방법
+
+- TPC Socket : 해당 컨테이너의 TCP 포트가 활성화 되어 있는지 확인
+
+- Exec : 컨테이너의 지정된 바이너리(명령)을 실행하여 확인
+
+- Headless Service : ClusterIP가 None으로 지정되어 있는 상태로 ClusterIP를 통해 LB를 사용하는 것이 아니라 직접 원하는 파드의 IP로 접속 할 수 있는 방법
+
+- volume : 파드는 별도로 데이터를 저장/관리 하지 않아 컨테이너가 삭제되면 데이터도 함께 삭제된다. 볼륨은 컨테이너가 삭제된 이후에도 보관되는 장소, 무작위 볼륨 생성 위치
+
+- emptyDir : 비어있는 컨테이너를 임시로(컨테이너 삭제시 없어짐) 데이터를 저장하여 오직 같은 노드에 있는 파드에 데이터를 공유
+
+- initContainer : git의 있는 데이터를 클론하여 빈 컨테이너에 저장하게 하고 마운트 하지만 한번만 실행 가능
+
+- hostPath : 지정한 위치(노드)에 볼륨생성이 가능. 해당 노드의 지정된 디렉토리를 볼륨으로 사용 즉, 노드와 경로를 지정하여 볼륨을 만들 수 있다.
