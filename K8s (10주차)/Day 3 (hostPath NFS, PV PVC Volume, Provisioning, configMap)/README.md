@@ -122,7 +122,7 @@ spec:
       labels:
         app: myapp-rs-hp-nfs
     spec:
-      nodeName: kube-node1
+      nodeName: kube-node1 
       containers:
       - name: web-server
         image: nginx:alpine
