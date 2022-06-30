@@ -92,7 +92,7 @@ pod/myapp-rs-j92bh   1/1     Running   0          21s
 pod/myapp-rs-l7mtn   1/1     Running   0          21s
 pod/myapp-rs-ppgxg   1/1     Running   0          21s
 
-NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE 
 service/kubernetes     ClusterIP   10.233.0.1      <none>        443/TCP        21h
 service/myapp-svc-np   NodePort    10.233.27.154   <none>        80:30000/TCP   21s
 
