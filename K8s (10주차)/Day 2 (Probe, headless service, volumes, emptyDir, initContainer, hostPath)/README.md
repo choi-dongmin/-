@@ -91,7 +91,7 @@ replicaset.apps/myapp-rs-readiness   3         3         0       83s
 
 NAME                            ENDPOINTS            AGE
 endpoints/kubernetes            192.168.56.11:6443   90m
-endpoints/myapp-svc-readiness                        2m58s
+endpoints/myapp-svc-readiness                        2m58s 
 ```
 
 - Unhealthy 부분을 보면 exec probe 확인을 위해에서 명령한 ls를 실행 할 수 없는데 체크하려는 파일이 존재하지 않기 때문이다.
