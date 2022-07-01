@@ -383,7 +383,7 @@ $ kubectl delete -f csi/cephfs/pod.yaml -f csi/cephfs/pvc.yaml
 1. 롤링 업데이트(Rolling Update)
 - 인스턴스를 하나씩 새로운 버전으로 교체해 나가는 방법
 - 배포 및 롤백 시간이 오래 걸리지만 배포를 위한 시스템 자원 적게 사용됨
-[출처] 배포 방식(롤링 배포/ 블루그린 배포/ 카나리 업데이트)|작성자 가빈아빠
+
 ![롤링 업데이트](https://postfiles.pstatic.net/MjAyMTExMjhfNzYg/MDAxNjM4MDk4ODY5NTk2.lCJ-3ZdlzjjhuAJ0XuEsQFzks63pfUtRcrsTnEdIm6kg.7vPjp_90jE5GkMF6czaPHfBamauoqMDR-vJHdRz2zjog.PNG.koys007/image.png?type=w773)
 
 2. 블루-그린 업데이트(Blue-Green Update)
