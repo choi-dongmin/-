@@ -84,7 +84,7 @@ dev : 시작 --------------> ops : 끝
 
 ## Git의 3가지 관리 상태
 - Git은 파일을 Modified, Staged, Committed 이렇게 세 가지 상태로 관리한다.
-- Git 버전관리에 매우 중요한 내용
+- Git 버전관리에 매우 중요한 내용 
 
 ! Committed, Modified, Staged](https://git-scm.com/book/en/v2/images/areas.png)
 
