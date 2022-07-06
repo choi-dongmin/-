@@ -141,6 +141,11 @@ $ sudo systemctl --now enable docker
 $ sudo docker run hello-world
 ```
 
+- add user
+```
+$ sudo usermod -aG docker [username]
+```
+
 # docker image commands
 - 이미지 이름 (이미지명:태그) : 이미지명은 일반적으로 App의 종류, 태그는 버전의 경우가 다수
 * Tag를 따로 지정하지 않는다면 Latest로 지정하기 때문에 특정 태그를 지정하는것을 권장 
