@@ -124,7 +124,7 @@ $ sudo apt install -y zsh
 
 - 기본 shell 바꾸기
 ```
-$ sudo cash -s /usr/bin/zsh
+$ sudo chsh -s /usr/bin/zsh
 ```
 
 - Oh My Zsh
