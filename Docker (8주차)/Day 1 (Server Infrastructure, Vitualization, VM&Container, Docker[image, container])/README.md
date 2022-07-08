@@ -117,6 +117,7 @@ docker 	image 		pull
 
 # Docker Install
 
+> CentOS
 - Setting Reposittory
 ```
 $  sudo yum install -y yum-utils
@@ -144,6 +145,69 @@ $ sudo docker run hello-world
 - add user
 ```
 $ sudo usermod -aG docker [username]
+```
+
+- re-evaluated
+```
+newgrp docker 
+```
+
+
+> Ubuntu
+- remove old version
+```
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
+```
+
+- Install apt pkg
+```
+$ sudo apt-get update
+
+$ sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+- GPG Key Add
+```
+$ sudo mkdir -p /etc/apt/keyrings
+ 
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+
+- Repository Setting
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+- Install Dokcer
+```
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+
+- Docker start and enable
+```
+$ sudo systemctl --now enable docker
+```
+
+- Test 
+```
+$ sudo docker run hello-world
+```
+
+- add user
+```
+$ sudo usermod -aG docker [username]
+```
+
+- re-evaluated
+```
+newgrp docker 
 ```
 
 # docker image commands
