@@ -30,7 +30,7 @@ spec:
         - containerPort: 8080
         imagePullPolicy: Never
 ...
-```
+``` 
 ```
 $ kubectl get nodes
 
