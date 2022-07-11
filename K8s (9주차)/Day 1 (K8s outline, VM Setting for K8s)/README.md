@@ -196,7 +196,7 @@ set cursorcolumn
 - ansible을 이용한 구축
 
 0. vagrant 설치
-![vagrant.com](https://www.vagrantup.com/downloads.html)
+[vagrant.com](https://www.vagrantup.com/downloads.html)
 
 1. 플러그인 설치
 - cmd 혹은 Pwoer Shell
