@@ -227,47 +227,62 @@ cd kube
 Vagrant.configure("2") do |config|
   config.vm.define "kube-master1" do |config|
     config.vm.box = "ubuntu/bionic64"
-    config.vm.provider "virtualbox" do |vb|
-      vb.name = "kube-master1"
-      vb.cpus = 2
-      vb.memory = 3072
-    end
-    config.vm.hostname = "kube-master1"
+    config.vm.hostname = "kube-controlplane1"
     config.vm.network "private_network", ip: "192.168.56.11"
-    config.disksize.size = "30GB"
+    config.vm.provider "virtualbox" do |vb|
+      vb.name = "kube-controlplane1"
+      vb.cpus = 2
+      vb.memory = 4096
+      if !File.exist?("test00.vdi") 
+        vb.customize ["createmedium", "disk", "--filename", "test00.vdi", "--size", 10240]
+      end
+      vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", "test00.vdi"]
+    end
   end
   config.vm.define "kube-node1" do |config|
     config.vm.box = "ubuntu/bionic64"
     config.vm.provider "virtualbox" do |vb|
       vb.name = "kube-node1"
       vb.cpus = 2
-      vb.memory = 3072
+      vb.memory = 4096
+      if !File.exist?("test01.vdi") 
+        vb.customize ["createmedium", "disk", "--filename", "test01.vdi", "--size", 10240]
+      end
+      vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", "test01.vdi"]
     end
     config.vm.hostname = "kube-node1"
     config.vm.network "private_network", ip: "192.168.56.21"
-    config.disksize.size = "30GB"
+    config.disksize.size = "50GB"
   end
   config.vm.define "kube-node2" do |config|
     config.vm.box = "ubuntu/bionic64"
     config.vm.provider "virtualbox" do |vb|
       vb.name = "kube-node2"
       vb.cpus = 2
-      vb.memory = 3072
+      vb.memory = 4096
+      if !File.exist?("test02.vdi") 
+        vb.customize ["createmedium", "disk", "--filename", "test02.vdi", "--size", 10240]
+      end
+      vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", "test02.vdi"]
     end
     config.vm.hostname = "kube-node2"
     config.vm.network "private_network", ip: "192.168.56.22"
-    config.disksize.size = "30GB"
+    config.disksize.size = "50GB"
   end
   config.vm.define "kube-node3" do |config|
     config.vm.box = "ubuntu/bionic64"
     config.vm.provider "virtualbox" do |vb|
-     vb.name = "kube-node3"
+      vb.name = "kube-node3"
       vb.cpus = 2
-      vb.memory = 3072
+      vb.memory = 4096
+      if !File.exist?("test03.vdi") 
+        vb.customize ["createmedium", "disk", "--filename", "test03.vdi", "--size", 10240]
+      end
+      vb.customize ["storageattach", :id, "--storagectl", "SCSI", "--port", 2, "--device", 0, "--type", "hdd", "--medium", "test03.vdi"]
     end
     config.vm.hostname = "kube-node3"
     config.vm.network "private_network", ip: "192.168.56.23"
-    config.disksize.size = "30GB"
+    config.disksize.size = "50GB"
   end
 
   # Hostmanager plugin
@@ -280,6 +295,8 @@ Vagrant.configure("2") do |config|
     sed -i 's/archive.ubuntu.com/ftp.daum.net/g' /etc/apt/sources.list
     sed -i 's/security.ubuntu.com/ftp.daum.net/g' /etc/apt/sources.list
     systemctl restart ssh
+    systemctl start systemd-timesyncd
+    timedatectl set-timezone UTC
   SHELL
 end
 ```
