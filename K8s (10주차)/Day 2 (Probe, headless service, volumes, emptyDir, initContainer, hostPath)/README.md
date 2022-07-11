@@ -399,10 +399,14 @@ endpoints/myapp-svc-fortune   10.233.76.149:80     38s
 5. 스토리지 공유 확인
 ![화면 캡처 2022-06-28 161758](https://user-images.githubusercontent.com/57117748/176207084-9d011e36-767c-47c7-88d3-14b78b0ba9bf.png)
 
+## infraContainer
+- 하나의 파드에 여러 컨테이너가 작동중이더라도 하나의 Ip를 받아 App을 실행하는데 혼용되지 않도록 한다.
+- 항상 작동
+
 ## initContainer
 - gitRepo 사용이 중지 되면서 gitrepo를 대체하기 위한 방법 초기화 컨테이너(initContainer)
 - 파드 생성 시, 1번 실행 후 종료
-
+- 파드에서 실직적인 목적(어플리케이션)을 위한 초기 구성에 필요한 작업을 진행
 What is gitRepo?
 - 기본적으로 EmptyDir와 같은 기능이지만 git 저장소를 동기화 할 수 있다는 차이가 있었다. 
 - git 레포지토리에 있는 데이터를 복제해 파드에게 제공하는 형태
