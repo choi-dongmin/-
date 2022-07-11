@@ -62,6 +62,11 @@ $ kubectl get deployments,replicasets,pods -o wide
 - 1개 이상의 컨테이너로 이루어진 컨테이너들의 집합
 - 컨테이너 : 이미지가 메모리에 올라가 실행되는 상태 
 
+* 파드 정의 시 주의사항
+1. Image 이름
+2. 포트는 이미지에서 정의한 어플리케이션이 실제 사용하는 포트를 지정해야함
+3. 파드의 레이블은 컨트롤러의 셀렉터 / 서비스 셀렉터와 일치시켜야함
+
 * Pods 주요 필드
 ∙ .spec.containers: 컨테이너 정의
 ∙ .spec.containers.image: 컨테이너에 사용할 이미지
@@ -70,21 +75,20 @@ $ kubectl get deployments,replicasets,pods -o wide
 ∙ .spec.containers.ports.containerPort: 노출할 컨테이너 포트번호
 ∙ .spec.containers.ports.protocol: 노출할 컨테이너 포트의 프로토콜
 
-
 * 오브젝트를 구성하는 메니페시트 작성시 필수 작성 요소
 ```
 yml 로 작성
 
-apiVersion:
-kind:
+apiVersion: v1
+kind: Pod
 metadata:
-  - A 
-  - B
+  name: pod-test
 spec:
-  - C
-    - D
-      E
-      F
+ containers
+    - name: myapp
+      image: arisu1000/simple-container-app:latest
+      ports:
+      - containerPort: 8080
 ```
 
 * 파드 생성
