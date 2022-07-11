@@ -404,7 +404,6 @@ $ vi inventory/mycluster/group_vars/k8s-cluster/addons.yml
 metrics_server_enabled: true
 ingress_nginx_enabled: true
 metallb_enabled: true
-
 # VM 네트워크 범위
 metallb_ip_range:
   - "192.168.56.50-192.168.56.99"
