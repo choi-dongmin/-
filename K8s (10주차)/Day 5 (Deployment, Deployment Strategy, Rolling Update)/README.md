@@ -564,6 +564,9 @@ spec:
 
 ## 출처
 [Deployment 이미지 출처](https://ooeunz.tistory.com/124)
+
 [트래픽 경로 이미지 출처](https://tech.kakao.com/2018/12/24/kubernetes-deploy/)
+
 [Rolling Update 이미지 출처](https://ooeunz.tistory.com/124)
+
 [Blue- Green Update 이미지 출처](https://ikcoo.tistory.com/22)
