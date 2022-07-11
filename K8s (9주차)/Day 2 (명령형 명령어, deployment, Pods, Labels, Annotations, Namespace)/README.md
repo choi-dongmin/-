@@ -125,6 +125,30 @@ $ kubectl logs testapp
 $ kubectl port-forward testapp 80:80
 ```
 
+## 파드 자원 할당
+- request : 해당 파드를 생성할 때 노드 선택에 참조 즉, 최소 리소스(request) 이상 만큼 생성 + 해당 파드가 원할하게 동작
+- limit : 동작 중인 파드에 대해 제한 (독점방지), 즉 파드 생성 후 자원 사용량 제한 + 다른 파드들이 원활하게 동작
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testapp-pod
+spec:
+  containers:
+  - image: c1t1d0s7/myweb
+    name: testapp
+    resources:
+      requests:
+        cpu: 1
+	memory: 200M
+      limit:
+        cpu: 0.5
+	memory: 1G
+    ports:
+    - containerPort: 80
+      protocol: TCP
+```
+
 ## Label
 - K8s 클러스터에 모든 오브젝트에 Key:value 형태로 존재
 - 리소스를 식별하고 속성을 확인하는데 사용
