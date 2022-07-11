@@ -348,7 +348,7 @@ $ cp -rfp inventory/sample inventory/mycluster
 ```
 $ vi inventory/mycluster/inventory.ini
 ```
-```
+```yml
 [all]  
 kube-master1	ansible_host=192.168.56.11 ip=192.168.56.11 ansible_connection=local
 kube-node1      ansible_host=192.168.56.21 ip=192.168.56.21
@@ -378,12 +378,29 @@ calico-rr
 ```
 
 11. 파라미터 확인 및 변경
+- addon 설정
 ```
 $ vi inventory/mycluster/group_vars/k8s-cluster/addons.yml
 ```
+```yml
+# false 에서 true 로 변경
+metrics_server_enabled: true
+ingress_nginx_enabled: true
+metallb_enabled: true
+
+# VM 네트워크 범위
+metallb_ip_range:
+  - "192.168.56.50-192.168.56.99"
+# 주석만 제거
+metallb_protocol: "layer2"
 ```
-metrics_server_enabled: true 	// 이와 같이 수정
-ingress_nginx_enabled: true		// 이와 같이 수정
+
+- Cluster 설정(metal-lb 설치 시 true 로 설정)
+```yml
+# vim inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+```
+```
+kube_proxy_strict_arp: true
 ```
 
 12. ansible 통신 가능 확인
