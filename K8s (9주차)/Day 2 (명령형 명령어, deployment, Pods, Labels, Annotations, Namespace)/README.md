@@ -471,6 +471,7 @@ replicaset.apps/test-deployment-5d8ff5d5   1         1         1       3m45s
 * 명령어 옵션 사용시 아래처럼 동작
 ```bash
 kubectl create deployment test-dep --image=nginx --dry-run=client -o yaml
+```
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
