@@ -195,29 +195,27 @@ its work
 - PVC 에서 요청하는 사이즈 조정 가능
 
 1. Provisioning(배포)
-	- pv를 원한는 크기로 맞게 설정하는 단계
-	- 정적인 방식(Static)과 동적인 방식(Dynamic) 가능
-	- Static Provisioning
-		: 미리 만들어두고 요청 시 알맞은 볼륨 선택, 수동으로 모든것을 연결
-	- Dynamic Provisioning
-		: Storage Class 를 통한 프로비저닝, 바인딩 자동화
+- pv를 원한는 크기로 맞게 설정하는 단계
+- 정적인 방식(Static)과 동적인 방식(Dynamic) 가능
+- Static Provisioning : 미리 만들어두고 요청 시 알맞은 볼륨 선택, 수동으로 모든것을 연결
+- Dynamic Provisioning : Storage Class 를 통한 프로비저닝, 바인딩 자동화
 
 2. Binding(연결)
-	- PV와 PVC , 그리고 파드 간의 연결을 하는 단계
-	- PVC 요청 시 알맞은 PV가 없으면 실패(대기 상태)
-	- PV 와 PVC 는 서로 1대1 관계
+- PV와 PVC , 그리고 파드 간의 연결을 하는 단계
+- PVC 요청 시 알맞은 PV가 없으면 실패(대기 상태)
+- PV 와 PVC 는 서로 1대1 관계
 
 3. Using(사용)
-	- 파드와 PVC (PV) 가 연결된 상태
-	- 사용 중인 상태
-	- 모든 파드가 종료된 후에 삭제 가능
-	- 임의로 삭제할 수 없도록 보호되고 있다
+- 파드와 PVC (PV) 가 연결된 상태
+- 사용 중인 상태
+- 모든 파드가 종료된 후에 삭제 가능
+- 임의로 삭제할 수 없도록 보호되고 있다
 
 4. Reclaim(반환)
-	- 사용이 끝나고 (모든 파드가 종료) PVC 를 삭제하면서 PV 에 대한 처리 방식 결정
-	1. Retain : 수동으로 PV 를 삭제 (쿠버네티스 오브젝트만 제거, 스토리지의 데이터는 유지), 데이터가 필요 없을 경우 해당 스토리지에서 직접 제거
-	2. Delete : PV, Storage를 삭제, Default 값으로 지정되어 있다.
-	3. Recycle : PV 및 데이터 삭제 후 PVC로 재사용 가능 (중단 예정)
+- 사용이 끝나고 (모든 파드가 종료) PVC 를 삭제하면서 PV 에 대한 처리 방식 결정
+1. Retain : 수동으로 PV 를 삭제 (쿠버네티스 오브젝트만 제거, 스토리지의 데이터는 유지), 데이터가 필요 없을 경우 당 스토리지에서 직접 제거
+2. Delete : PV, Storage를 삭제, Default 값으로 지정되어 있다.
+3. Recycle : PV 및 데이터 삭제 후 PVC로 재사용 가능 (중단 예정)
 
 ## 영구 볼륨의 유형
 - [플러그인 목록](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes)
