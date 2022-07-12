@@ -294,6 +294,16 @@ $ kubectl describe pods testapp-pod-anno -o yaml | grep -i -A 3 'annotation'
 6. rook-ceph
 	- Rook Ceph 스토리지 관련 리소스 배치   
 
+* Docker Namespace vs K8s Namespace
+1. 도커에서 사용하는 네임스페이스
+	- **리눅스**의 기능
+	- **컨테이너의 리소스를 격리**해주기 위한 용도
+
+2. 쿠버네티스에서의 네임스페이스
+	- **쿠버네티스**에서 **관리**하는 **오브젝트** 중의 하나
+	- 쿠버네티스에서 **오브젝트**를 **격리**하는 용도
+	- 목적에 따라 사용하는 경우가 많다
+
 
 * namespace 확인
 ```
