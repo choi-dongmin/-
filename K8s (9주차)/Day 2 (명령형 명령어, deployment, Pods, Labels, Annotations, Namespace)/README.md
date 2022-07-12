@@ -464,6 +464,42 @@ NAME                                       DESIRED   CURRENT   READY   AGE
 replicaset.apps/test-deployment-5d8ff5d5   1         1         1       3m45s
 ```
 
+## --dry-run
+- 만약 어떠한 **tamplate**을 **작성**해야 하는데 해당 **yaml** 파일의 **구조**가 **기억**이 나지 **않을때**, 혹은 하나 하나 **요소**들을 **기입**하기 **번거러울때** 사용 할 수 있는 옵션이다
+- `--dry-run=client -o yaml`
+
+* 명령어 옵션 사용시 아래처럼 동작
+```bash
+kubectl create deployment test-dep --image=nginx --dry-run=client -o yaml
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-dep
+  name: test-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-dep
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-dep
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+```
+![화면 캡처 2022-07-12 111243](https://user-images.githubusercontent.com/57117748/178399407-4a5875a3-feba-4907-a8df-803d280b4e02.png)
+![화면 캡처 2022-07-12 111248](https://user-images.githubusercontent.com/57117748/178399413-c7a5fcd9-ff0f-4022-a08e-1b7dd8a5fa19.png)
+
 ## 키워드
 - deployments : replicaSet과 Pod 정보를 정의하는 상위 오브젝트
 - replicaSet : 포드의 개수을 유지 시켜주는 오브젝트 replicaSet=3 상태에서 3개의 파드중 하나를 삭제해도 3을 맞춰주기 위해 다시 1개 더 만든다
