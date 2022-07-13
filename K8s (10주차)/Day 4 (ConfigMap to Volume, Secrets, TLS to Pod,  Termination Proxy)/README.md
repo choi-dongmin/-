@@ -1,3 +1,116 @@
+# annotation(애너테이션)
+- 추가 정보를 저장 (주석과 유사)
+- 고유한 속성을 정의 (인그레스 리다이렉트 / 롤아웃기록 등)
+
+# ConfigMap
+- 별도의 데이터 저장을 위한 오브젝트
+- 개발, 배포, 운영사이에 더 쉬운 환경 변수를 찾기 위해 사용
+- 같은 이미지를 이용해서 설정이 다른 컨테이너를 실행하려고 사용
+- 컨피그맵을 설정하고 해당 파드에서 그 값을 사용(전체 또는 일부 값을 호출해서 사용)
+- 환경변수로 호출 : 변수의 값으로 설정
+- volume 형태로 마운트 : 파일
+
+```
+도커		ENTRYPOINT		CMD
+쿠버네티스	command		args
+```
+
+## env 변수로 어플리케이션으로 값전달
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod-env
+spec:
+  containers:
+  - image: ghcr.io/c1t1d0s7/go-myweb:alpine
+    name: myapp
+    env:
+    - name: MESSAGE
+      value: "Customized Hello World!"
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+```
+
+- 8080 포트 사용 확인
+```
+$ netstat -antp | grep 8080
+```
+
+- 8080 포트로 포트 포워딩
+```
+$ kubectl port-forward myapp-pod-env 8080:8080
+```
+
+- 새로운 터미널에서 env 환경변수 확인
+```
+$ curl http://localhost:8080
+Customized Hello World!
+myapp-pod-env
+```
+
+## ConfigMap 생성 방법
+1. 명령어 이용하여 생성
+```
+$ kubectl create configmap  <이름>  [--from-file=source]  [--from-listeral=key1=vaule1]
+
+									--form-literal=key1=value1  옵션으로 파일을 참조
+									--from-file=source
+									--from-file=source=key=source
+```
+```
+$ kubectl get configmap
+$ kubectl describe configmap [이름]
+```
+
+2. object 파일을 이용
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod-cm
+spec:
+  containers:
+  - image: ghcr.io/c1t1d0s7/go-myweb:alpine
+    name: myapp
+    env:
+    - name: MESSAGE
+      valueFrom:
+        configMapKeyRef:
+          name: myapp-message      # configmap name
+          key: message                       # key 또는 file명
+    args:
+    - $(MESSAGE)
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+
+```
+
+- cnofigMap 생성
+```
+$ kubectl create configmap myapp-message --from-file=configmap/
+$ kugectl get configmap
+```
+
+- configmap pod 생성 
+```
+$ kubectl create -f myapp-pod-cm.yaml
+$ kubectl get pod
+```
+
+- 포트 포워딩
+```
+$ kubectl port-forward myapp-pod-cm 8080:8080
+```
+
+- 새로운 터미널에서 확인
+```
+$ curl http://localhost:8080
+Hello World by ConfigMap
+myapp-pod-cm
+```
 # configmap으로 볼륨(File) 사용하기
 
 - 리눅스의 특성상 폴더 및 파일에 마운트를 진행 할때 이미 어떠한 데이터 및 파일이 있다면 마운트 된 후 기존에 존재하던 파일은 접근할 수 없다.
