@@ -2,6 +2,8 @@
 - Ingress 는 L7 LB  , application LB  , HTTP LB (Matallb 는 L4 LB)
 - URL, Hostname을 기준으로 LoadBalancing을 진행
 - 외부의 노출이 존재함
+- 실제 동작은 각 노드의 Ingress-controler 가 실행
+
 
 * Ingress 
 ![화면 캡처 2022-06-27 142711](https://user-images.githubusercontent.com/57117748/175907159-9a183d34-f45a-40ad-814a-40242f11141a.png)
