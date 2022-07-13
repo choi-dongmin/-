@@ -61,7 +61,7 @@ $ kubectl apply -f [yaml 파일]
 - Deployment Delete Command
 ```
 kubectl delete -f [yaml 파일]	
-```
+``` 
 
 - Deployment yaml Composition
 ```
