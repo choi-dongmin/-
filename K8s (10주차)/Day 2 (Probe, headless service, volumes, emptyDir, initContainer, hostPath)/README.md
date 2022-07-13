@@ -55,7 +55,7 @@ spec:
       labels:
         app: myapp-rs-readiness
     spec:
-      containers:
+      containers: 
       - name: myapp
         image: ghcr.io/c1t1d0s7/go-myweb:alpine
         readinessProbe:
