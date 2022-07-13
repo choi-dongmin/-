@@ -48,7 +48,7 @@ $ kubectl port-forward myapp-pod-env 8080:8080
 $ curl http://localhost:8080
 Customized Hello World!
 myapp-pod-env
-```
+``` 
 
 ## ConfigMap 생성 방법
 1. 명령어 이용하여 생성
