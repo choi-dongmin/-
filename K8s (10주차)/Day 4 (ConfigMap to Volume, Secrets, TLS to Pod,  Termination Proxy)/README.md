@@ -31,7 +31,7 @@ kubectl create configmap nginx-gzip-config --from-file=nginx-gzip.conf
 $ kubectl get configmap
 NAME               DATA   AGE
 nginx-tls-config   1      3h19m
-
+ 
 
 $ kubectl describe configmap nginx-tls-config
 Name:         nginx-tls-config
