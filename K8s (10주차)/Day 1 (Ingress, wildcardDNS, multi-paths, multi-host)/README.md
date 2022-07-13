@@ -56,7 +56,7 @@ spec:
     app: myapp-rs
 ...
 ```
-
+ 
 3. ReplicaSet manifest 작성
 ```
 ---
