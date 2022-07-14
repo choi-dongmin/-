@@ -371,6 +371,13 @@ $ kubectl delete -f csi/cephfs/pod.yaml -f csi/cephfs/pvc.yaml
 )
 [ceph-filesystem-crd](https://rook.io/docs/rook/v1.2/ceph-filesystem-crd.html)
 
+## PVC 크기 늘리기
+gcePersistentDisk, awsElasticBlockStore, cinder, glusterfs, rdb, azureFile, azureDisk, portworxvolume 등 플러그인을 사용 했다면 항당된 PVC 용량을 쉽게 늘릴수 있다.
+- `spec.storageClassName.allowVolumeExpansion` 필드에 true 값으로 지정
+- 파일 시스템도 같이 확장해야 한다.(확장 후 재시작 해야한다
+
+
+
 # Labels
 - 파드 등에 설정하여 컨트롤러/서비스의 셀렉터로 연결 및 구성
 - 다수의 레이블 설정 가능(셀렉터 또한 다수 레이블 가능)
