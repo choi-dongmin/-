@@ -503,7 +503,7 @@ initContainer 생성 -> volume 연결되어 git clone 코드를 저장 -> 종료
 ```
 
 # hostPath
-- 쿠버네티스 클러스터 노드(호스트)의 파일 시스템을 제공. '노드 내' 파일공유 지원하며 '경로 지정'이 가능한 볼륨
+- 쿠버네티스 클러스터 노드(호스트)의 파일 시스템을 제공. **노드 내** 파일공유 지원하며 **경로 지정**이 가능한 볼륨
 ![화면 캡처 2022-06-28 143900](https://user-images.githubusercontent.com/57117748/176227492-04e1dbd1-f3ec-44a1-9864-1db57fd5a5ef.png)
 
 1. svc manifest 작성
