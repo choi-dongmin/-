@@ -286,7 +286,7 @@ $ kubectl create -f pvc-hostpath.yaml
 
 3. 레이블로 PVC와 PV를 연결하기
 ```
-$ kubectl create -f pv-hostpath-label.yaml -f pvc-hostpath-vable.yamll
+$ kubectl create -f pv-hostpath-label.yaml -f pvc-hostpath-vable.yaml
 ```
 
 4. 파드에서 PVC 를 볼륨으로 사용하기 
