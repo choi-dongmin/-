@@ -50,7 +50,7 @@ spec:
   selector:
     matchLabels:
       app: myapp-rs-readiness
-  template:
+  template: 
     metadata:
       labels:
         app: myapp-rs-readiness
