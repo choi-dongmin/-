@@ -42,7 +42,7 @@
 
 ## 시스템의 가상화
 
-![VM vs Container(https://raw.githubusercontent.com/collabnix/dockerlabs/master/beginners/docker/images/vm-docker5.png)]
+![VM vs Container](https://raw.githubusercontent.com/collabnix/dockerlabs/master/beginners/docker/images/vm-docker5.png)
 
 1. 가상머신을 통한 가상화
 	- 하이퍼바이저를 통해 운용하는 가상머신
