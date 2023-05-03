@@ -262,7 +262,7 @@ Network 8		Network IP : 160.250.128.224/27
 - 흐름제어(Flow Contorol), 혼잡제어(Congestion Control) 등의 기능을 제공함.
 - 연결 지향형(Connection Oriented) 프로토콜이다.
 
-![TCP Header](https://www.gatevidyalay.com/wp-content/uploads/2018/09/TCP-Header-Format.png)
+![다운로드](https://user-images.githubusercontent.com/57117748/235821159-33febe8c-9609-4ebc-862f-8808017617af.png)
 
 
 - 필수 Header
