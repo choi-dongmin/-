@@ -141,16 +141,16 @@ SSL    : 컴퓨터 네트워크에 통신 보안을 제공하기 위해 설계�
 ```
 TCP/IP Suite 				OSI 7 Layer
 
-L4(Application Later)		L7(Appliaction Layer)
-							L6(Presentaion Layer)
-							L5(Sassion Layer)
+L4(Application Later)			L7(Appliaction Layer)
+					L6(Presentaion Layer)
+					L5(Sassion Layer)
 
 L3(Transport Layer)			L4(Transport Layer)
 
 L2(Internet Layer)			L3(Network Layer)
 
 L1(Network Layer)			L2(Data-Link Layer)
-							L1(Physical Layer)
+					L1(Physical Layer)
 
 ```
 
